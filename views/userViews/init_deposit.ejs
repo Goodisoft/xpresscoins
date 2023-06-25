@@ -1,0 +1,230 @@
+<!doctype html>
+<html lang="en">
+  <head>
+   
+    <%- include('../snippets/meta_data.ejs')  %> 
+    
+    <title>Xpresscoins | World Best Mining Company</title>
+    
+    <!-- Custom styles for this template -->
+    <link href="/css/dashboard.css" rel="stylesheet">
+    
+    <!-- Icon CDN -->
+    <script src="https://unpkg.com/feather-icons"></script>
+
+  </head>
+  <body class="">
+    
+    <!-- Include navbar -->
+    <%- include('../snippets/main_navbar.ejs') %> 
+
+    <div class="container-fluid" >
+      <div class="row">
+
+            <!-- Include sidebar -->
+            <%- include('../snippets/sidebar.ejs') %> 
+
+          
+            <!-- Start 2nd row -->
+            <div class="table-responsive row " >
+
+              <div class="col-lg-6 col-md-12 col-sm-12 mx-auto">
+
+                <!-- Deposit start here -->
+                <div class="card mb-4 rounded-3 shadow card-stat deposit ">
+                  <div class="card-body">
+                    <h6 class="text-start text-dark">Make Deposit</h6>
+                    
+                    <form id="init_deposit">
+                      <div class="row mt-4">
+                        <div class="col-md-5 mb-3">
+                          <!-- <label class="text-white">Currency</label> -->
+                          <select class="form-select form-select-lg" name="currency" required>
+                            <option value="">Select currency</option>
+                            <option value="BTC">Bitcoin</option>
+                            <option value="ETH">Ethereum</option>
+                            <option value="USDT">Tether USD</option>
+                          </select>
+                          <div class="text-danger mt-2" id="currencyErr"></div>
+                        </div>
+
+                        <div class="col">
+                          <div class="input-group">
+                            <span class="input-group-text" id="basic-addon1">$</span>
+                            <input type="text" name="amount" class="form-control form-control-lg" placeholder="Amount" required>
+                          </div>
+                          <small class="text-dark">Amount in dollars (1000)</small>
+                          <div class="text-danger mt-2" id="amountErr"></div>
+                        </div>
+                      </div>
+                      
+                      <div class="text-center mt-4 mb-3">
+                        <button type="submit" class="btn btn-outline-warning btn-md">Proceed</button> 
+                      </div>
+                    </form>
+                  </div>
+                </div>
+                <!-- Deposit end here -->
+
+
+
+
+                <!-- Confirm deposit start here -->
+                <div class="card mb-4 rounded-3 shadow card-stat confirm_deposit">
+                  <div class="card-body">
+                    <h5 class="text-dark text-center">Transaction Details</h5> <br>
+                    <p>
+                      Currency: <span class="mb-4 display_currency text-dark fw-bold"></span><br><br>
+                      Amount: <span class="display_amount text-dark fw-bold"></span>
+                    </p>
+                    
+
+                    <!-- Display usdt-trc20 -->
+                    <% if (context.address === null) { %>
+                      <div class="text-center mt-5">
+                        No wallet available. Please contact support or you try again.
+                      </div>
+                      <% } else { %>
+
+                        <% context.address.forEach(a => { %>
+                          <!-- Show btc wallet address -->
+                          <% if (a.currency === 'BTC') { %>
+                            <p></p>
+                            <!-- Display BTC wallet -->
+                            <div class="btc_address">
+                              
+                              <div class="text-center mt-5 text-dark">
+                                <span id="text" class="fw-bold h6"><%= a.wallet_address %></span>
+                                <br><br>
+                                
+                                <button class=" btn btn-outline-warning" type="button" id="copyBtn">Copy</button>
+                                <div class="text-success" id="sucssMsg"></div>
+                              </div>
+                            </div>
+
+                          <% } %>
+
+                            <!-- Show Eth wallet address -->
+                            <% if (a.currency === 'ETH') { %>
+                              <!-- Display usdt wallet -->
+                              <div class="eth_address">
+                                <div class="text-center mt-5 text-dark ">
+                                  <span id="eth_wallet" class="fw-bold h6"><%= a.wallet_address %></span>
+                                  <br><br>
+                                  <button class=" btn btn-outline-warning" type="button" id="ethBtn">Copy</button>
+                                  <div class="text-success" id="ethMsg"></div>
+                                </div>
+                              </div>
+  
+                            <% } %>
+
+                          <!-- SHow usdt-TRC20 wallet address -->
+                          <% if (a.currency === 'USDT') { %>
+                           
+                            <!-- Display usdt wallet -->
+                            <div class="ltc_address">
+                              <div class="text-center mt-5 text-dark">
+                                <span id="usd_wallet" class="fw-bold h6"><%= a.wallet_address %></span>
+                                <br><br>
+                                <button class=" btn btn-outline-warning" type="button" id="usdBtn">Copy</button>
+                                <div class="text-success" id="usdMsg"></div>
+                              </div>
+                            </div>
+                          <% } %>
+                      <% }) %>
+                    <% } %>
+                   
+
+                    <form id="confirm_deposit">
+                      <div class="row mt-5">
+                        <div class="col">
+                          <label class="text-dark">Paste Transaction ID/Hash</label>
+                          <input type="text" name="transaction_id" placeholder="Paste transaction hash" class="form-control form-control-lg" >
+                          <div class="uploadErr text-danger mt-2"></div>
+                        </div>
+                      </div>
+                      
+                      <div class="text-center mt-4 mb-3">
+                        <button type="submit" class="btn btn-outline-warning block btn-md">Save transaction</button> 
+                      </div>
+                    </form>
+                     
+                  </div>
+                </div>
+                <!-- COnfirm deposit ends here -->
+
+              </div>
+            </div>
+            <!-- End 2nd row -->
+
+        </main>
+      </div>
+    </div>
+
+
+
+    <!--  Include toast -->
+    <%- include('../snippets/toast.ejs') %> 
+
+
+    <!--  Include copy text -->
+    <%- include('../snippets/copy_text.ejs') %>
+
+    <!-- Include the scripts -->
+    <%- include('../snippets/scripts.ejs') %>
+
+
+  <!-- Live chat -->
+  <%- include('../snippets/live_chat.ejs') %>
+
+    
+    <!-- INitialized feather CDN -->
+    <script>
+      feather.replace()
+    </script>
+
+    <script src="/scripts/init_deposit.js"></script>
+
+    <!-- Copy eth wallet address -->
+    <script type="text/javascript">
+     
+      const usdBtn = document.getElementById('usdBtn');
+      const usdMsg = document.getElementById('usdMsg');
+      const usd_wallet = document.getElementById('usd_wallet');
+
+      let eth_Btn = document.getElementById('ethBtn');
+      let ethMsg = document.getElementById('ethMsg');
+      let eth_wallet = document.getElementById('eth_wallet');
+
+      usdBtn.addEventListener('click', () =>{
+        // Get the link from the element
+        navigator.clipboard.writeText(usd_wallet.innerHTML);
+
+        usdBtn.style.color = 'green';
+        usdMsg.innerHTML = 'Copied';
+        usdMsg.style.color = 'green';
+
+        setInterval(() => {
+          usdMsg.style.display = 'none';
+        }, 2000);
+      })
+
+
+      eth_Btn.addEventListener('click', () =>{
+        // Get the link from the element
+        navigator.clipboard.writeText(eth_wallet.innerHTML);
+
+        eth_Btn.style.color = 'green';
+        ethMsg.innerHTML = 'Copied';
+        ethMsg.style.color = 'green';
+
+        setInterval(() => {
+          ethMsg.style.display = 'none';
+        }, 2000);
+      })
+
+ 
+    </script>
+
+  </body>
+</html>

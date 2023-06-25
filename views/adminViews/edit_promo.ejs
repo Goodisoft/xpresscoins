@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+  <head>
+   
+    <!-- Include the header -->
+    <%- include('../snippets/meta_data.ejs')  %> 
+
+    <title>Xpresscoins | World Best Mining Company</title>
+    
+    <!-- Custom styles for this template -->
+    <link href="/css/dashboard.css" rel="stylesheet">
+    
+    <!-- Icon CDN -->
+    <script src="https://unpkg.com/feather-icons"></script>
+
+    <!-- Data table cdn -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.0/css/jquery.dataTables.css">
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.0/js/jquery.dataTables.js"></script>
+   
+  </head>
+  <body>
+    
+    <!-- Include navbar -->
+    <%- include('../snippets/main_navbar.ejs') %> 
+
+    <div class="container-fluid" >
+      <div class="row">
+
+        <% var context; %> 
+
+        <!-- Include sidebar -->
+        <%- include('../snippets/sidebar.ejs') %> 
+            <h5 class="text-start h6 text-center">Edit Promo Plan</h5>
+            <!-- First row -->
+            <div class="table-responsive row card-stat p-4">
+                <div class="col-lg-6 col-md-12 col-sm-12 mx-auto">
+
+                    <form id="edit_promo_form">
+                        <div class="col">
+                            <input type="hidden" name="promo_id" value="<%= context.promos._id; %>" class="form-control" >
+                        </div>
+
+                        <div class="col mb-3">
+                            <label class="text-dark">Title (not editable)</label>
+                            <input type="text" value="<%= context.promos.title; %>" name="title" class="form-control" >
+                        </div>
+      
+                        <div class="col mb-3">
+                            <label class="text-dark">Hourly Profit (in percentage)</label>
+                            <input type="text" value="<%= context.promos.profit; %>" name="profit" class="form-control" >
+                            <div class="text-danger mt-1" id="profitErr"></div>
+                        </div>
+                      
+                        <div class="col mb-3">
+                            <label class="text-dark">Duration (in hours)</label>
+                            <input type="text" value="<%= context.promos.duration; %>" name="duration" class="form-control" >
+                            <div class="text-danger mt-1" id="durationErr"></div>
+                        </div>
+      
+                        <div class="col mb-3">
+                            <label class="text-dark">Activation amount</label>
+                            <input type="text" value="<%= context.promos.activation; %>" name="activation" class="form-control" >
+                            <small class="text-muted">Minimum-Maximum</small>
+                            <div class="text-danger mt-1" id="activationErr"></div>
+                        </div>
+      
+                        <div class="text-center mt-4 mb-3">
+                          <button type="submit" class="btn btn-outline-warning btn-md">
+                            Save Changes
+                          </button> 
+                        </div>
+      
+                    </form>
+                </div>
+        </main>
+      </div>
+    </div>
+
+
+    <!-- Include toast -->
+    <%- include('../snippets/toast.ejs') %>
+
+    <!-- Include the scripts -->
+    <%- include('../snippets/scripts.ejs') %>
+
+    <!-- Icon CDN -->
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.29.0/feather.min.js" integrity="sha512-24XP4a9KVoIinPFUbcnjIjAjtS59PUoxQj3GNVpWc86bCqPuy3YxAcxJrxFCxXe4GHtAumCbO2Ze2bddtuxaRw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> -->
+
+    <!-- INitialized feather CDN -->
+    <script>
+      feather.replace()
+    </script>
+
+   <!-- Link the submit handler -->
+   <script src="/scripts/edit_promo_plan.js"></script>
+
+
+  </body>
+</html>

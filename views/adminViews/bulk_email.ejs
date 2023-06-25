@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+  <head>
+   
+    <!-- Include the header -->
+    <%- include('../snippets/meta_data.ejs')  %> 
+
+    <title>Xpresscoins | World Best Mining Company</title>
+    
+    <!-- Custom styles for this template -->
+    <link href="/css/dashboard.css" rel="stylesheet">
+    
+    <!-- Icon CDN -->
+    <script src="https://unpkg.com/feather-icons"></script>
+
+    <!-- Data table cdn -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.0/css/jquery.dataTables.css">
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.0/js/jquery.dataTables.js"></script>
+   
+  </head>
+  <body>
+    
+    <!-- Include navbar -->
+    <%- include('../snippets/main_navbar.ejs') %> 
+
+    <div class="container-fluid" >
+      <div class="row">
+
+        <% var context; %> 
+
+        <!-- Include sidebar -->
+        <%- include('../snippets/sidebar.ejs') %> 
+
+            <h5 class="text-start h6 text-center">Send Bulk Email</h5>
+            <!-- First row -->
+            <div class="table-responsive row card-stat p-4">
+               
+                <div class="col-lg-6 col-md-12 col-sm-12 mx-auto">
+                  
+                <form id="bulk_email_form">
+                    <div class="mb-4 mt-3">
+                        <label class="">Subject</label>
+                        <input type="text" name="subject" class="form-control" required>
+                    </div>
+
+                    <div class="col">
+                        <label class="">Message Body</label>
+                        <textarea name="message" class="form-control" 
+                        placeholder="Write your message" cols="50" rows="6" required></textarea>
+                    </div>
+                    
+                    <div class="text-center mt-4 mb-3">
+                        <button type="submit" class="btn btn-outline-warning btn-md">Send Bulk Email</button> 
+                    </div>
+                </form>
+                </div>
+        </main>
+      </div>
+    </div>
+
+
+    <!-- Include toast -->
+    <%- include('../snippets/toast.ejs') %>
+
+    <!-- Include the scripts -->
+    <%- include('../snippets/scripts.ejs') %>
+
+    <!-- Icon CDN -->
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.29.0/feather.min.js" integrity="sha512-24XP4a9KVoIinPFUbcnjIjAjtS59PUoxQj3GNVpWc86bCqPuy3YxAcxJrxFCxXe4GHtAumCbO2Ze2bddtuxaRw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> -->
+
+    <!-- INitialized feather CDN -->
+    <script>
+      feather.replace()
+    </script>
+
+   <!-- Link the submit handler -->
+   <script src="/scripts/bulk_email.js"></script>
+
+
+  </body>
+</html>

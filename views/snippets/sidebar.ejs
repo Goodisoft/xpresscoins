@@ -1,0 +1,181 @@
+<nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block sidebar collapse mt-5 " >
+    <div class="position-sticky pt-3 navbar-nav-scroll">
+      <ul class="nav flex-column ">
+
+        <% var _user; %> 
+
+        <% if (_user.isAdmin) { %>
+         
+          <li class="nav-item">
+            <a class="nav-link" href="/account/home">
+              <span data-feather="menu"></span>
+              Dashboard
+            </a>
+          </li>
+
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="/account/road-map" role="button" aria-expanded="false">
+              <span data-feather="arrow-right-circle"></span>
+              Payments
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="/account/deposit">Deposits</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" href="/account/mining-withdrawals">Withdrawals</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" href="/account/reinvestment">Reinvestment</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" href="/account/referral-withdrawals">Referral withdrawals</a></li>
+        
+            </ul>
+          </li>
+
+
+          <li class="nav-item ">
+            <a class="nav-link" href="/account/view-users" >
+              <span data-feather="users"></span>
+              Create Admin
+            </a>
+          </li>
+
+
+        <li class="nav-item">
+          <a class="nav-link" href="/account/user-account">
+            <span data-feather="edit"></span>
+            Edit User's Account
+          </a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" href="/account/add-plan">
+            <span data-feather="package"></span>
+            Register plan
+          </a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" href="/account/add-wallet">
+            <span data-feather="pocket"></span>
+            Add Wallet Address
+          </a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" href="/account/view-referral">
+            <span data-feather="users"></span>
+            View Referrals
+          </a>
+        </li>
+
+
+        <li class="nav-item">
+          <a class="nav-link" href="/account/create-promo">
+            <span data-feather="check-circle"></span>
+            Create Promo
+          </a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" href="/account/promo-deposits">
+            <span data-feather="layers"></span>
+             Promo Deposit
+          </a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" href="/account/notice">
+            <span data-feather="bell"></span>
+            Post Notice
+          </a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" href="/account/send-bulk-email">
+            <span data-feather="mail"></span>
+            Bulk Email
+          </a>
+        </li>
+
+        <ul class="nav flex-column mb-2">
+         
+        <% } else { %>
+          <li class="nav-item">
+            <a class="nav-link" href="/user/account">
+              <span data-feather="home"></span>
+              Home
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="/user/init-deposit">
+              <span data-feather="package"></span>
+              Make Deposit
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="/user/withdraw">
+              <span data-feather="dollar-sign"></span>
+              Withdraw
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="/user/referrals">
+              <span data-feather="link-2"></span>
+              Referral
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="/user/history">
+              <span data-feather="loader"></span>
+              History
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="/user/profile">
+              <span data-feather="settings"></span>
+              Profile
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="/auth/logout">
+              <span data-feather="power"></span>
+              Logout
+            </a>
+          </li>
+        <% } %>
+
+      </ul>
+    </div>
+  </nav>
+
+
+
+  <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 ">
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-2">
+
+      <div></div>
+   
+      <div class="btn-toolbar mb-2 mb-md-0">
+        <div class="alert alert-info">
+          Welcome back; <%= _user.username %>!
+        </div>
+      </div>
+    </div>
+
+    <script>
+      const sidebar = document.querySelector('.sidebar');
+      sidebar.addEventListener('show.bs.collapse', event => {
+        sidebar.style.backgroundColor = 'rgb(255, 255, 255)';
+
+      });
+
+      //sidebar.addEventListener('hide.bs.collapse', event => {
+       // sidebar.style.backgroundColor = 'rgb(255, 255, 255, .2)';
+
+      //})
+    </script>

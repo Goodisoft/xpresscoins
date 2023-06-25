@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <%- include('./snippets/header.ejs')  %> 
+
+    <title>Xpresscoins | World Best Mining Company</title>
+
+</head>
+<body>
+
+    <!-- Navigation -->
+    <%- include('./snippets/navigation.ejs')  %> 
+    <!-- End navigation -->
+
+    <!-- investment plan -->
+    <div class="container-fluid text-center mt-5 py-5 investment-plans" style="overflow-x: hidden;">
+      <h2 class=" text-primary mb-2 mt-5 display-6">Packages</h2>
+      <div class="container">
+          <p>
+              In Xpresscoins, the rewards earned
+              through mining are distributed among the participating 
+              miners based on their contributed computing power (hash rate).
+              The specific method of distributing rewards can vary 
+              depending on the mining pool's protocol or rules.
+          </p>
+      </div>
+      <div class="container mt-5 mb-5">
+          <div class="card-deck row">
+
+            <% if (context.plans) { %>
+              <% context.plans.forEach(plan => { %>
+                <div class="col-lg-4 col-md-6 col-sm-12 mb-3">
+                  <div class="card text-center plan-card">
+                    <div class="card-header h4 text-center bg-primary">
+                      <%= plan.title %>
+                    </div>
+                    <div class="card-body">
+                        <h6 class="card-title">Profit: <%= plan.profit %>% daily</h6>
+                        <p class="card-text">Duration: <%= plan.duration %> Days</p>
+                        <p class="card-text">Activation: $<%= plan.activation %></p>
+                        <div class="text-center">
+                            <img src="/images/features/target.gif" width="50" alt="">
+                        </div>
+                        <a href="/sign-in" class="btn btn-primary text-white mt-2 rounded-pill">
+                            Get Started
+                        </a>
+                    </div>
+                  </div> 
+                </div>
+  
+              <% }) %>
+            <% } %>
+
+         
+          </div>
+      </div>
+
+       <!-- Referral component -->
+       <div class="container">
+        <div class=" mb-3">
+          <h5 class=" about-title tex-center">Affiliate Program</h5>
+          <p class="card-text mt-2 text-start">
+            You earn extra cash when the personyou refer make a valid deposit. The earning 
+            percentage is as shown below.
+
+          </p>
+        </div>           
+      </div>
+      <div class="row">
+        
+        <div class="col-lg-4 col-md-6 col-sm-12 mx-auto tex-center">
+          <div class="card text-center plan-card">
+            <div class="card-header h4 text-center bg-primary">
+                Affiliate <br> Earning
+            </div>
+            <div class="card-body">
+              <p class="text-dark">Direct Bonus: 10% per valid desposit</p>
+              <p class="text-dark">Indirect Bonus: 5% per valid deposit </p>
+              
+                <a href="" class="btn btn-primary text-white mt-2 rounded-pill">
+                    Get Started
+                </a>
+            </div>
+          </div> 
+          
+        </div> 
+      </div> 
+  </div>
+  <!-- investment ends -->
+
+    <!-- Start Footer Area -->
+    <%- include('./snippets/footer.ejs')  %> 
+    <!--/ End Footer Area -->
+
+    <!-- ========================= scroll-top ========================= -->
+    <a href="#" class="scroll-top">
+        <i class="lni lni-chevron-up"></i>
+    </a>
+
+    <!-- ========================= JS here ========================= -->
+    <%- include('./snippets/scripts.ejs')  %> 
+
+    <!-- Live chat -->
+    <%- include('./snippets/live_chat.ejs') %>
+
+    
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

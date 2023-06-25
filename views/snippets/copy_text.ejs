@@ -1,0 +1,23 @@
+<script>
+
+    let copyBtn = document.getElementById('copyBtn');
+    let display_success = document.getElementById('sucssMsg');
+    let text = document.getElementById('text');
+
+
+    copyBtn.addEventListener('click', () =>{
+      // Get the link from the element
+      let copied_text = text.innerHTML;
+      /* Copy the referral link */
+      navigator.clipboard.writeText(copied_text);
+
+      copyBtn.style.color = 'green';
+      display_success.innerHTML = 'Copied';
+      display_success.style.color = 'green';
+
+      setInterval(() => {
+        display_success.style.display = 'none';
+      }, 2000);
+    })
+
+</script>

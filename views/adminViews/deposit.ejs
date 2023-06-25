@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en">
+  <head>
+   
+    <!-- Include the header -->
+    <%- include('../snippets/meta_data.ejs')  %> 
+
+    <title>Xpresscoins | World Best Mining Company</title>
+    
+    <!-- Custom styles for this template -->
+    <link href="/css/dashboard.css" rel="stylesheet">
+    
+    <!-- Icon CDN -->
+    <script src="https://unpkg.com/feather-icons"></script>
+
+    <!-- Data table cdn -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.0/css/jquery.dataTables.css">
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.0/js/jquery.dataTables.js"></script>
+   
+  </head>
+  <body>
+    
+    <!-- Include navbar -->
+    <%- include('../snippets/main_navbar.ejs') %> 
+
+    <div class="container-fluid" >
+      <div class="row">
+
+        <% var context; %> 
+
+        <!-- Include sidebar -->
+        <%- include('../snippets/sidebar.ejs') %> 
+            <h5 class="text-start h6 text-center">Confirm deposit</h5>
+            <!-- First row -->
+            <div class="table-responsive row card-stat p-4">
+                <table class="table table-hover table-sm" id="nfts_table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Name</th>
+                            <th scope="col">Currency</th>
+                            <th scope="col">Amount</th>
+                            <th scope="col">Transaction ID</th>
+                            <th scope="col">Approve</th>
+                            <th scope="col">Action</th>
+                            <th scope="col">Cancel</th>
+                            <th scope="col">Date</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                      <% if (context.deposit) { %>
+
+                       <% context.deposit.forEach(deposit => { %>
+
+                        <!-- Format the date -->
+                        <% var date = new Date(deposit.deposit_date); %>
+                        <tr>
+                          <td><%= deposit.user.full_name %></td>
+                          <td><%= deposit.currency %> </td>
+                          <td>$<%= deposit.amount %> </td>
+                          <td><%= deposit.transaction_id %> </td>
+                          <td><a class="btn btn-success btn-sm" href="/account/confirm-deposit?payer=<%= deposit._id %>">Confirm</a></td>
+                          <td><a class="btn btn-warning btn-sm" href="/account/edit-mining-deposit?trans_id=<%= deposit._id %>">Edit</a></td>
+                          <td><a class="btn btn-danger btn-sm" href="/account/delete-deposit?trans_id=<%= deposit._id %>">Delete</a></td>
+                          <td><%= date.toDateString(); %> </td>
+                      </tr>
+
+                       <% }) %>
+                      <% } %>
+                        
+                    </tbody>
+                </table>
+        </main>
+      </div>
+    </div>
+
+
+    <!-- Include toast -->
+    <%- include('../snippets/toast.ejs') %>
+
+    <!-- Include the scripts -->
+    <%- include('../snippets/scripts.ejs') %>
+
+    <!-- INitialized feather CDN -->
+    <script>
+      feather.replace()
+    </script>
+
+<!-- Handle error and success message -->
+    <% if (context.error) { %>
+      <script>
+        
+          $(document).ready(() =>{
+            $('.toast-body').html('<%= context.error %>');
+              $('.toast').css('background-color', 'red');
+              $('.toast').toast('show');
+          });
+
+          setInterval(() => {
+            window.location.href = '/account/home';
+          }, 3000);
+      </script>
+    <% } %>
+
+    <% if (context.success) { %>
+      <script>
+          $(document).ready(() =>{
+            $('.toast-body').html('<%= context.success %>');
+              $('.toast').css('background-color', 'rgb(13, 152, 186, .8)');
+              $('.toast').toast('show');
+          });
+
+          setInterval(() => {
+            window.location.href = '/account/home';
+          }, 3000);
+      </script>
+    <% } %>
+
+    <!-- Data table CDN initialisation-->
+    <script>
+      $(document).ready( function () {
+          $('#nfts_table').DataTable();
+      } );
+    </script>
+
+  </body>
+</html>

@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+  <head>
+   
+    <!-- Include the header -->
+    <%- include('../snippets/meta_data.ejs')  %> 
+
+    <title>Xpresscoins | World Best Mining Company</title>
+    
+    <!-- Custom styles for this template -->
+    <link href="/css/dashboard.css" rel="stylesheet">
+    
+    <!-- Icon CDN -->
+    <script src="https://unpkg.com/feather-icons"></script>
+  </head>
+  <body class="">
+    
+    <!-- Include navbar -->
+    <%- include('../snippets/main_navbar.ejs') %> 
+
+    <div class="container-fluid" >
+      <div class="row">
+
+            <!-- Include sidebar -->
+            <%- include('../snippets/sidebar.ejs') %> 
+
+            <!-- Start 2nd row -->
+            <div class="table-responsive row " >
+           
+              <div class="col-lg-6 col-md-12 col-sm-6 mx-auto ">
+                <div class="card-stat p-4">
+                 <h5 class="text-start h6 text-dark">Update Password</h5>
+                   <form id="update_password_form">
+                     <div class="mb-4 mt-4">
+                         <input type="password" name="old_password" class="form-control form-control-lg" placeholder="Enter your old password" >
+                         <div class="text-danger mt-2" id="oldPassErr"></div>
+                     </div>
+ 
+                     <div class="mb-4">
+                         <input type="password" name="new_password" class="form-control form-control-lg" placeholder="Enter new password" >
+                         <div class="text-danger mt-2" id="newPassErr"></div>
+                     </div>
+ 
+                     <div class="mb-4">
+                         <input type="password" name="confirm_password" class="form-control form-control-lg" placeholder="Confirm new password" >
+                         <div class="text-danger mt-2" id="confirmPassErr"></div>
+                     </div>
+                 
+                     <div class="text-center mt-4 mb-3">
+                     <button type="submit" class="btn btn-outline-warning btn-md">
+                      Save Changes
+                    </button> 
+                     </div>
+                   </form>
+                </div>
+              </div>
+
+            </div>
+            <!-- End 2nd row -->
+
+            </div>
+            <!-- End 2nd row -->
+
+        </main>
+      </div>
+    </div>
+
+
+    <!--  Include toast -->
+    <%- include('../snippets/toast.ejs') %> 
+
+
+    <!-- Include the scripts -->
+    <%- include('../snippets/scripts.ejs') %>
+
+    <!-- INitialized feather CDN -->
+    <script>
+      feather.replace()
+    </script>
+
+    <script src="/scripts/update_password.js"></script>
+
+    <!-- Process withdrawal password -->
+    <script src="/scripts/withdrawal_password.js"></script>
+
+    
+  <!-- Live chat -->
+  <%- include('../snippets/live_chat.ejs') %>
+  
+  </body>
+</html>

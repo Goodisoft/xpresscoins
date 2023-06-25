@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <%- include('./snippets/header.ejs')  %> 
+
+    <title>Xpresscoins | World Best Mining Company</title>
+
+</head>
+<body>
+
+    <!-- Navigation -->
+    <%- include('./snippets/navigation.ejs')  %> 
+    <!-- End navigation -->
+
+      <!--  Contact Start -->
+      <section>
+        <div class="container mt-5 mb-5">
+                <h2 class="display-6 text-center mt-5 mb-5">
+                    Contact Us
+                </h2>
+            <div class="row">
+                <div class="col-12 col-lg-6 wow fadeInUp" data-wow-delay=".6s">
+                    <div class="contact-information mb-5">
+                        <h4>Contact us for more infor</h4>
+                        <div class="contact-social-info d-flex mt-2 mb-2">
+                            <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+                            <a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+                            <a href="#"><i class="fa fa-whatsapp" aria-hidden="true"></i></a>
+                            <a href="#"><i class="fa fa-telegram" aria-hidden="true"></i></a>
+                        </div>
+
+                    
+                        <div class="single-contact-info d-flex">
+                            <div class="contact-icon mr-2">
+                                <i class="fa fa-phone"></i>
+                            </div>
+                            <p>+1-633-992-324543 </p>
+                        </div>
+
+                        <div class="single-contact-info d-flex">
+                            <div class="contact-icon mr-2">
+                                <i class="fa fa-envelope-o"></i>
+                            </div>
+                            <p>support@xpresscoins.com</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contact Form Area -->
+                <div class="col-12 col-lg-6">
+                    <div class="contact-form-area mb-2">
+                        <form id="contact_form">
+                            <input type="text" class="form-control" name="name" placeholder="Name">
+                            <div class="nameErr text-center text-danger mb-2"></div>
+
+                            <input type="email" class="form-control" name="email" placeholder="E-mail">
+                            <div class="emailErr text-center text-danger mb-2"></div>
+
+                            <input type="hidden" class="form-control p-1" name="contact_id"/>
+
+                            <textarea name="message" class="form-control" cols="30" rows="10" placeholder="Message"></textarea>
+                            <div class="messageErr text-center text-danger mb-2"></div>
+
+                            <button class="btn btn-outline-primary mt-3" type="submit">Contact Us</button>
+                        </form>
+                        <div class="response mt-2"></div>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="mx-auto col-md-6">
+            </div>
+        </div>
+        </div>
+    </section>
+    <!-- Contact End  -->
+
+
+
+    <!-- Start Footer Area -->
+    <%- include('./snippets/footer.ejs')  %> 
+    <!--/ End Footer Area -->
+
+    <!-- ========================= scroll-top ========================= -->
+    <a href="#" class="scroll-top">
+        <i class="lni lni-chevron-up"></i>
+    </a>
+
+    <!-- ========================= JS here ========================= -->
+    <%- include('./snippets/scripts.ejs')  %> 
+
+    <!-- ========== Live Chat =========== -->
+    <%- include('./snippets/live_chat.ejs') %>
+
+    
+</body>
+</html>

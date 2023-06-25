@@ -1,0 +1,338 @@
+<!doctype html>
+<html lang="en">
+  <head>
+   
+    <%- include('../snippets/meta_data.ejs')  %> 
+    
+    <title>Xpresscoins | World Best Mining Company</title>
+
+    <!-- Custom styles for this template -->
+    <link href="/css/dashboard.css" rel="stylesheet">
+    
+    <!-- Icon CDN -->
+    <script src="https://unpkg.com/feather-icons"></script>
+
+  </head>
+  <body>
+    
+    <!-- Include navbar -->
+    <%- include('../snippets/main_navbar.ejs') %> 
+
+    <div class="container-fluid" >
+      <div class="row">
+
+        <!-- Include sidebar -->
+        <%- include('../snippets/sidebar.ejs') %> 
+
+        <% var context; %> 
+            <!-- First row -->
+            <div class="table-responsive row mt-4" >
+
+              <div class="col-lg-2 col-md-4 col-sm-4">
+                <div class="card mb-4 custom_card">
+                  <div class="card-body">
+                    <div class="">
+                      <span class="card-title pricing-card-title text-dark fw-bold">Registered Members</span>
+                    </div>
+                    <h5 class="card-title h3 pricing-card-title text-dark text-center me-4 "><%= context.count_members %> </h5>
+                    <p class="text-muted">Active: <span class="text-success"><%= context.active_account %></span> </p>
+                    <p class="text-muted">Inactive: <span class="text-danger"><%= context.blocked_account %></span> </p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-lg-2 col-md-4 col-sm-4">
+                <div class="card mb-4 custom_card">
+                  <div class="card-body">
+                    <div class="">
+                      <span class="card-title pricing-card-title text-dark fw-bold">Members statistics</span>
+                    </div>
+                    <p class="text-muted mt-2">Total Deposit: <span class="text-dark"> $<%= context.all_deposit %></span> </p>
+                    <p class="text-muted">Total Withdrawal: <span class="text-dark"> $<%= context.all_withdrawal %></span> </p> 
+                  </div>
+                </div>
+              </div>
+              
+              <div class="col-lg-2 col-md-4 col-sm-4">
+                <div class="card mb-4 custom_card">
+                  <div class="card-body" data-bs-toggle="tooltip" data-bs-placement="top"
+                  data-bs-custom-class="custom-tooltip"
+                  data-bs-title="The total balance in members wallet.">
+                    <div class="">
+                      <span class="card-title pricing-card-title text-dark fw-bold">Members Wallet</span>
+                    </div>
+                    <p class="text-muted mt-2">Total Balance: <span class="text-dark"> $<%= context.total_balance %></span> </p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-lg-2 col-md-4 col-sm-4">
+                <div class="card mb-4 custom_card">
+                  <div class="card-body">
+                    <div class="">
+                      <span class="card-title pricing-card-title text-dark fw-bold">Referral Statistics</span>
+                    </div>
+                    <p class="text-muted mt-3">Total Referral Earning: <span class="text-dark"> $<%= context.total_ref_earning %></span> </p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-lg-2 col-md-4 col-sm-4">
+                <div class="card mb-4 custom_card">
+                  <div class="card-body">
+                    <div class="">
+                      <span class="card-title pricing-card-title text-dark fw-bold"> Referral Paid Out</span>
+                    </div>
+                    <p class="text-muted mt-3">Total Paid Out: <span class="text-dark"> $<%= context.total_ref_paid_out %></span> </p>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+            <!-- end first row -->
+
+              <!-- 2nd row -->
+              <div class="table-responsive row" >
+
+                <div class="col-lg-2 col-md-4 col-sm-4">
+                  <div class="card mb-4 custom_card">
+                    <div class="card-body">
+                      <div class="">
+                        <span class="card-title pricing-card-title text-dark fw-bold">New Deposit</span>
+                      </div>
+                      <h5 class="card-title h3 pricing-card-title text-dark text-center me-4 "><%= context.count_mining_deposit %> </h5>
+                      <p class="text-success">Total amount: $<%= context.unconfirm_deposit %></p>
+                      <div class="text-center mb-2">
+                        <a href="/account/deposit" class="btn btn-outline-warning btn-sm">
+                          Check out
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+  
+                <div class="col-lg-2 col-md-4 col-sm-4">
+                  <div class="card mb-4 custom_card">
+                    <div class="card-body">
+                      <div class="card-title pricing-card-title text-center text-dark fw-bold"> 
+                        Pending Withdrawal
+                      </div>
+                      <h5 class="card-title h3 pricing-card-title text-dark text-center me-4 "><%= context.count_mining_withdrawal %> </h5>
+                      <p class="text-danger">Total amount: $<%= context.pending_withdrawal %></p>
+                      <div class="text-center mb-2">
+                        <a href="/account/mining-withdrawals" class="btn btn-outline-warning btn-sm">
+                          Check out
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                
+                <div class="col-lg-2 col-md-4 col-sm-4">
+                  <div class="card mb-4 custom_card">
+                    <div class="card-body">
+                      <div class="">
+                        <span class="card-title pricing-card-title text-center text-dark fw-bold" >Referral Withdrawal</span>
+                      </div>
+                      <h5 class="card-title h3 pricing-card-title text-center text-end me-4 "><%= context.count_referral_withdrawal %></h5>
+                      <p class="text-danger">Total amount: $<%= context.total_referral_withdrawal %></p>
+                      <div class="text-center mb-2">
+                        <a href="/account/referral-withdrawals" 
+                        class="btn btn-outline-warning btn-sm">Check out</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+  
+                <div class="col-lg-2 col-md-4 col-sm-4">
+                  <div class="card mb-4 custom_card">
+                    <div class="card-body">
+                      <div class="text-center">
+                        <span class="card-title pricing-card-title  text-dark fw-bold">Mining Session</span> <br>
+                          <p>Add bonus to mining account</p>
+                      </div>
+                      <div class="text-center mb-2">
+                        <a href="/account/view-mining-acccount" 
+                        class="btn btn-outline-warning btn-sm">View Mining</a>
+                      </div>                    
+                    </div>
+                    
+                  </div>
+                </div>
+  
+                <div class="col-lg-2 col-md-4 col-sm-4">
+                  <div class="card mb-4 custom_card">
+                    <div class="card-body" 
+                    data-bs-toggle="tooltip" data-bs-placement="right"
+                    data-bs-custom-class="custom-tooltip"
+                    data-bs-title="Comment when adding bonus">
+                      <div class="card-title pricing-card-title text-center text-dark fw-bold"> 
+                        View All Comments
+                      </div>
+                      <div class="text-center mb-2">
+                        <a href="/account/view-comments" class="btn btn-outline-warning btn-sm">
+                          View comment
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+  
+              </div>
+              <!-- end 2nd row -->
+
+
+             <!-- 3rd row -->
+             <div class="table-responsive row" >
+
+              <div class="col-lg-2 col-md-4 col-sm-4">
+                <div class="card mb-4 custom_card">
+                  <div class="card-body">
+                    <div class="">
+                      <span class="card-title pricing-card-title text-dark fw-bold"> Wallet Address</span>
+                    </div>
+                    <h5 class="card-title h3 pricing-card-title text-dark text-center me-4 "><%= context.count_address %> </h5>
+                    <div class="text-center mb-2">
+                      <a href="/account/view-wallet-address" class="btn btn-outline-warning btn-sm">
+                        Company wallet
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-lg-2 col-md-4 col-sm-4">
+                <div class="card mb-4 custom_card">
+                  <div class="card-body">
+                    <div class="text-center">
+                      <span class="card-title pricing-card-title  text-dark fw-bold">Confirm Deposits</span>
+                      <p class="text-muted">Confirmed Deposit</p>
+                      <p class="text-success fw-bold">Total: $<%= context.total_deposit %></p>
+                    </div>
+                    <div class="text-center mb-2">
+                      <a href="/account/view-confirm-deposits" 
+                      class="btn btn-outline-warning btn-sm">View</a>
+                    </div>                    
+                  </div>
+                </div>
+              </div>
+              
+              <div class="col-lg-2 col-md-4 col-sm-4">
+                <div class="card mb-4 custom_card">
+                  <div class="card-body">
+                    <div class="text-center">
+                      <span class="card-title pricing-card-title  text-dark fw-bold">Paid Out</span>
+                      <p class="text-muted">Approved withdrawals</p>
+                      <p class="text-danger fw-bold">Total: $<%= context.total_paid %></p>
+                    </div>
+                    <div class="text-center mb-2">
+                      <a href="/account/view-paid-out" 
+                      class="btn btn-outline-warning btn-sm">Paid Out</a>
+                    </div>                    
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-lg-2 col-md-4 col-sm-4">
+                <div class="card mb-4 custom_card">
+                  <div class="card-body">
+                    <div class="text-center">
+                      <span class="card-title pricing-card-title  text-dark fw-bold">Manage Referrals</span>
+                      <p class="text-muted">You can edit referral wallet here</p>
+                    </div>
+                    <div class="text-center mb-2">
+                      <a href="/account/view-referral" 
+                      class="btn btn-outline-warning btn-sm">View</a>
+                    </div>                    
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-lg-2 col-md-4 col-sm-4">
+                <div class="card mb-4 custom_card">
+                  <div class="card-body">
+                    <div class="text-center">
+                      <span class="card-title pricing-card-title  text-dark fw-bold">Post Notice</span>
+                      <p class="text-muted">Notice will display on all user's dashboard</p>
+                    </div>
+                    <div class="text-center mb-2">
+                      <a href="/account/notice" 
+                      class="btn btn-outline-warning btn-sm">Post Notice</a>
+                    </div>                    
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- end 3rd row -->
+
+            <!-- 2nd row -->
+            <div class="table-responsive row" >
+
+              <div class="col-lg-2 col-md-4 col-sm-4">
+                <div class="card mb-4 custom_card">
+                  <div class="card-body">
+                    <div class="card-title pricing-card-title text-center text-dark fw-bold"> 
+                      Registered Plan
+                    </div>
+                    <h5 class="card-title h3 pricing-card-title text-dark text-center me-4 "><%= context.count_plan %> </h5>
+                    <div class="text-center mb-2">
+                      <a href="/account/view-plan" class="btn btn-outline-warning btn-sm">
+                        View Plans
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+
+              <div class="col-lg-2 col-md-4 col-sm-4">
+                <div class="card mb-4 custom_card">
+                  <div class="card-body">
+                    <div class="text-center">
+                      <span class="card-title pricing-card-title  text-dark fw-bold">Promo Plan</span>
+                      <p class="text-muted">Add attractive promo plan for your investors </p>
+                    </div>
+                    <div class="text-center mb-2">
+                      <a href="/account/create-promo" 
+                      class="btn btn-outline-warning btn-sm">Create Promo</a>
+                    </div>                    
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-lg-2 col-md-4 col-sm-4">
+                <div class="card mb-4 custom_card">
+                  <div class="card-body">
+                    <div class="text-center">
+                      <span class="card-title pricing-card-title  text-dark fw-bold">Confirm Promo Deposit</span>
+                      <p class="text-muted">Confirm New promo deposits </p>
+                    </div>
+                    <div class="text-center mb-2">
+                      <a href="/account/promo-deposits" 
+                      class="btn btn-outline-warning btn-sm">Create Promo</a>
+                    </div>                    
+                  </div>
+                </div>
+              </div>
+              
+
+            </div>
+            <!-- end 2nd row -->
+
+        </main>
+      </div>
+    </div>
+
+    <!-- Include the scripts -->
+    <%- include('../snippets/scripts.ejs') %>
+
+    <!-- INitialized feather CDN -->
+    <script>
+      feather.replace()
+
+      const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
+      const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))      
+    </script>
+
+  </body>
+</html>

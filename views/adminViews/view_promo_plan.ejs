@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="en">
+  <head>
+   
+    <!-- Include the header -->
+    <%- include('../snippets/meta_data.ejs')  %> 
+
+    <title>Xpresscoins | World Best Mining Company</title>
+    
+    <!-- Custom styles for this template -->
+    <link href="/css/dashboard.css" rel="stylesheet">
+    
+    <!-- Icon CDN -->
+    <script src="https://unpkg.com/feather-icons"></script>
+
+    <!-- Data table cdn -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.0/css/jquery.dataTables.css">
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.0/js/jquery.dataTables.js"></script>
+  
+  </head>
+  <body>
+    
+    <!-- Include navbar -->
+    <%- include('../snippets/main_navbar.ejs') %> 
+
+    <div class="container-fluid" >
+      <div class="row">
+
+        <% var context; %> 
+
+       
+        <!-- Include sidebar -->
+        <%- include('../snippets/sidebar.ejs') %> 
+            <h5 class="text-center h6">Promo Plans <span class="ms-4"><a class="btn btn-warning btn-sm" href="/account/create-promo">Create New Promo</a></span></h5>
+            <!-- First row -->
+            <div class="table-responsive row card-stat p-4">
+                <table class="table table-hover table-sm" id="user_table">
+                    <thead>
+                        <tr>
+                            <th scope="col">S/n</th>
+                            <th scope="col">Title</th>
+                            <th scope="col">Profit</th>
+                            <th scope="col">Duration</th>
+                            <th scope="col">Activation Amount</th>
+                            <th scope="col">Status</th>
+                            <th scope="col">Publish</th>
+                            <th scope="col">Unpublish</th>
+                            <th scope="col" class="text-center">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                      <% if (context.promo_plans) { %>
+                       <% let count = 0 %> 
+
+                       <% context.promo_plans.forEach(p => { %>
+
+                          <% count = count + 1; %> 
+
+                          <tr>
+                            <td><%= count %> </td>
+                            <td><%= p.title %> </td>
+                            <td><%= p.profit %>%</td>
+                            <td><%= p.duration %> hours</td>
+                            <td>$<%= p.activation %> </td>
+                            <% if (p.isRunning) { %>
+                                <td class="text-success">Running</td>
+                                <% } else { %>
+                                <td class="text-danger">Not Running</td>
+                            <% } %>
+
+                            <td><a href="/account/start-promo?promo_id=<%= p._id %>" 
+                                class="btn btn-outline-success btn-sm">
+                                Start
+                                </a>
+                            </td>
+
+                            <td><a href="/account/stop-promo?promo_id=<%= p._id %>" 
+                                class="btn btn-danger btn-sm">
+                                Stop
+                                </a>
+                            </td>
+
+                            <td>
+                              <div class="btn-group g-2">
+                                <a href="/account/edit-promo-plan?promo_id=<%= p._id %>" 
+                                  class="btn btn-outline-success btn-sm me-2">
+                                  Edit
+                                </a>
+                                <a href="/account/delete-promo?promo_id=<%= p._id %>" 
+                                  class="btn btn-outline-danger btn-sm">
+                                  Delete
+                                </a>
+                              </div>
+                            </td>
+                              
+                          </tr>
+
+                       <% }) %>
+                      <% } %>
+                       
+                    </tbody>
+                </table>
+
+        </main>
+      </div>
+    </div>
+
+    <!-- Include toast -->
+    <%- include('../snippets/toast.ejs') %>
+
+    <!-- Include the scripts -->
+    <%- include('../snippets/scripts.ejs') %>
+
+    <!-- Icon CDN -->
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.29.0/feather.min.js" integrity="sha512-24XP4a9KVoIinPFUbcnjIjAjtS59PUoxQj3GNVpWc86bCqPuy3YxAcxJrxFCxXe4GHtAumCbO2Ze2bddtuxaRw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> -->
+
+    <!-- INitialized feather CDN -->
+    <script>
+      feather.replace()
+    </script>
+
+
+<% if (context.error) { %>
+  <script>
+    
+      $(document).ready(() =>{
+        $('.toast-body').html('<%= context.error %>');
+          $('.toast').css('background-color', 'red');
+          $('.toast').toast('show');
+      });
+
+      setInterval(() => {
+        window.location.href = '/account/view-promo-plans';
+      }, 3000);
+  </script>
+<% } %>
+
+<% if (context.success) { %>
+  <script>
+      $(document).ready(() =>{
+        $('.toast-body').html('<%= context.success %>');
+          $('.toast').css('background-color', 'rgb(13, 152, 186, .8)');
+          $('.toast').toast('show');
+      });
+
+      setInterval(() => {
+        window.location.href = '/account/view-promo-plans';
+      }, 3000);
+  </script>
+<% } %>
+
+
+     <!-- Data table CDN initialisation-->
+     <script>
+        $(document).ready( function () {
+            $('#user_table').DataTable();
+        } );
+    </script>
+  </body>
+</html>

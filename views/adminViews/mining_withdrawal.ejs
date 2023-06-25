@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="en">
+  <head>
+   
+    <!-- Include the header -->
+    <%- include('../snippets/meta_data.ejs')  %> 
+
+    <title>Xpresscoins | World Best Mining Company</title>
+    
+    <!-- Custom styles for this template -->
+    <link href="/css/dashboard.css" rel="stylesheet">
+    
+    <!-- Icon CDN -->
+    <script src="https://unpkg.com/feather-icons"></script>
+
+    <!-- Data table cdn -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.0/css/jquery.dataTables.css">
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.0/js/jquery.dataTables.js"></script>
+   
+  </head>
+  <body>
+    
+    <!-- Include navbar -->
+    <%- include('../snippets/main_navbar.ejs') %> 
+
+    <div class="container-fluid" >
+      <div class="row">
+
+        <% var context; %> 
+
+        <!-- Include sidebar -->
+        <%- include('../snippets/sidebar.ejs') %> 
+            <h5 class="text-start h6 text-center">Withdrawal</h5>
+            <!-- First row -->
+            <div class="table-responsive row card-stat p-4">
+                <table class="table table-hover table-sm" id="nfts_table">
+                    <thead>
+                        <tr>
+                            <th scope="col">S/n</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">Currency</th>
+                            <th scope="col">Amount</th>
+                            <th scope="col">Wallet address</th>
+                            <th scope="col">Date</th>
+                            <th scope="col">Confirm</th>
+                            <th scope="col">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                      <% if (context.withdrawals) { %>
+
+                        <% let  count = 0; %> 
+
+                       <% context.withdrawals.forEach(w => { %>
+
+                        <% count = count + 1; %> 
+                        <!-- Format the date -->
+                        <% var date = new Date(w.withdrawal_date); %>
+
+                        <tr>
+                          <td><%= count %> </td>
+                          <td><%= w.user.full_name %></td>
+                          <td><%= w.currency %> </td>
+                          <td>$<%= w.amount %> </td>
+                          <td><%= w.address %> </td>
+                          <td><%= date.toDateString(); %> </td>
+                          <td><a class="btn btn-outline-success btn-sm text-decoration-none " href="/account/confirm-mining-withdrawal?wit_id=<%= w._id %>">Approve</a></td>
+                          <td><a class="text-decoration-none text-danger" href="/account/cancel-withdrawal?trans_id=<%= w._id %>">Cancel</a></td>
+                      </tr>
+
+                       <% }) %>
+                      <% } %>
+                        
+                    </tbody>
+                </table>
+        </main>
+      </div>
+    </div>
+
+
+    <!-- Include toast -->
+    <%- include('../snippets/toast.ejs') %>
+
+    <!-- Include the scripts -->
+    <%- include('../snippets/scripts.ejs') %>
+
+    <!-- Icon CDN -->
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.29.0/feather.min.js" integrity="sha512-24XP4a9KVoIinPFUbcnjIjAjtS59PUoxQj3GNVpWc86bCqPuy3YxAcxJrxFCxXe4GHtAumCbO2Ze2bddtuxaRw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> -->
+
+    <!-- INitialized feather CDN -->
+    <script>
+      feather.replace()
+    </script>
+
+<!-- Handle error and success message -->
+    <% if (context.error) { %>
+      <script>
+        
+          $(document).ready(() =>{
+            $('.toast-body').html('<%= context.error %>');
+              $('.toast').css('background-color', 'red');
+              $('.toast').toast('show');
+          });
+
+          setInterval(() => {
+            window.location.href = '/account/mining-withdrawals';
+          }, 2000);
+      </script>
+    <% } %>
+
+    <% if (context.success) { %>
+      <script>
+          $(document).ready(() =>{
+            $('.toast-body').html('<%= context.success %>');
+              $('.toast').css('background-color', 'rgb(13, 152, 186, .8)');
+              $('.toast').toast('show');
+          });
+
+          setInterval(() => {
+            window.location.href = '/account/confirm-mining-withdrawal';
+          }, 2000);
+      </script>
+    <% } %>
+
+    <!-- Data table CDN initialisation-->
+    <script>
+      $(document).ready( function () {
+          $('#nfts_table').DataTable();
+      } );
+    </script>
+
+  </body>
+</html>

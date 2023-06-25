@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <%- include('./snippets/header.ejs')  %> 
+
+    <title>Xpresscoins | World Best Mining Company</title>
+
+</head>
+<body>
+
+    <!-- Navigation -->
+    <%- include('./snippets/navigation.ejs')  %> 
+    <!-- End navigation -->
+
+    <!-- about section -->
+    <section class="about_section layout_padding">
+        <div class="container">
+        <div class="text-center text-white">
+            <h2>Mission</h2>
+            <p>
+                Xpresscoins Pool is on a mission to reduce bitcoin mining’s carbon footprint 
+                to create a more sustainable and friendly industry. 
+                Join our mining pool today and a portion of your mining will generated a sustainable
+                income.
+            </p>
+        </div>
+        <div class="row">
+            <div class="col-md-6 mt-3">
+                <div class="detail-box">
+                    <h3 class="text-center">About Us</h3>
+                    <p>
+                        Xpresscoins mining pool is a collaborative group of cryptocurrency miners who 
+                        combine computing resources to increase chances of successfully
+                        mining blocks and earning rewards.
+
+                        Cryptocurrencies like Bitcoin and Ethereum use a consensus mechanism 
+                        called Proof of Work (PoW) to validate and add new transactions to the 
+                        blockchain. Mining involves solving complex mathematical problems to 
+                        validate transactions and create new blocks. <br> <br>
+
+                        Xpresscoins mining pools allow individual miners to pool their resources and work 
+                        together towards mining blocks more efficiently. When a miner in our pool 
+                        successfully mines a block, the rewards are distributed among all the 
+                        participants based on their contributed computing power (Activation plan). 
+                        This ensures a more regular and predictable income for miners.
+                    </p>
+                </div>
+            </div>
+            <div class="col-md-6 mt-2">
+                <div class="img-box">
+                    <img src="/images/features/about1-img.png" alt="">
+                </div>
+            </div>
+        </div>
+        </div>
+    </section>
+    <!-- end about section -->
+
+
+
+    <!-- certificate -->
+    <section class="layout_padding mb-2 text-white" style="background-color: #24126A;">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <div class="">
+                        <h3 class="mb-4">
+                         We Are the Mining Pool
+                        </h3>
+                        <p>
+                            As a mining pool, we have the opportunity to provide you with the mining 
+                            forces to join and maximize your mining efficiency.
+                            To ensure the success and attractiveness of your mining pool, consider a 
+                            reliable and secure infrastructure
+                            i.e building a robust and secure mining infrastructure that can handle a 
+                            significant amount of computational power. 
+                        </p> <br>
+                        <p>
+                            This includes powerful servers, stable network connections, and appropriate 
+                            backup and security measures to protect
+                            miners' contributions and rewards. Also we ensure compatibility with a wide 
+                            range of mining software, allowing miners to 
+                            connect using their preferred mining software or hardware. 
+                            Supporting multiple mining algorithms and cryptocurrencies can
+                            also attract a diverse group of miners.
+                            Continuous improvement and innovation will be made therefore Stay informed about 
+                            advancements in the mining technology, industry trends, and emerging
+                            cryptocurrencies because we will continually evaluate and enhance your mining pool's 
+                            features, services, and performance to stay competitive
+                            and attract new miners.
+                        </p>
+                    </div>
+                </div>
+                <div class="col-md-6  ">
+                    <div class="img-box">
+                        <img src="/images/features/cert.jpg" alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- certificate end-->
+
+
+    <!-- Video Start -->
+    <div class="container-xxl py-5 px-0 wow zoomIn" data-wow-delay="0.1s">
+        <div class="row g-0">
+            <div class="col-md-6">
+                <div class="video">
+                    <button type="button" class="btn-play" data-bs-toggle="modal" 
+                    data-src="https://www.youtube.com" data-bs-target="#videoModal">
+                        <span></span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="col-md-6 bg-light d-flex align-items-center">
+                <div class="p-5">
+                    <h6 class=" text-start text-primary text-uppercase mb-3">Financial Freedom</h6>
+                    <h1 class="text-dark mb-4 display-6">Discover A New Way To mine More</h1>
+                    <p class="text-dark mb-4">
+                        Joining different mining pools Explore different mining pools and 
+                        compare their reward distribution methods, fees, and overall performance. 
+                        Joining a mining pool with a higher hash rate or better rewards structure 
+                        can potentially 
+                        increase your chances of earning more mining rewards.
+                    </p>
+                    <div class="button wow fadeInUp" data-wow-delay=".8s">
+                        <a href="/sign-up" class="btn ">Get Started</a>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+    <div class="modal fade" id="videoModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content rounded-0">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Youtube Video</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <!-- 16:9 aspect ratio -->
+                    <div class="ratio ratio-16x9">
+                        <iframe class="embed-responsive-item" src="" id="video" allowfullscreen allowscriptaccess="always"
+                            allow="autoplay"></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Video Start -->
+
+    <!-- Start Footer Area -->
+    <%- include('./snippets/footer.ejs')  %> 
+    <!--/ End Footer Area -->
+
+    <!-- ========================= scroll-top ========================= -->
+    <a href="#" class="scroll-top">
+        <i class="lni lni-chevron-up"></i>
+    </a>
+
+    <!-- ========================= JS here ========================= -->
+    <%- include('./snippets/scripts.ejs')  %> 
+
+    <!-- ===========Live Chat =========== -->
+    <%- include('./snippets/live_chat.ejs') %>
+
+    
+</body>
+</html>

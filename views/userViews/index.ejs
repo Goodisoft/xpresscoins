@@ -1,0 +1,566 @@
+<!doctype html>
+<html lang="en">
+  <head>
+   
+    <%- include('../snippets/meta_data.ejs')  %> 
+    <!-- custom css -->
+    <title>Xpresscoins | World Best Mining Company</title>
+
+    <!-- Custom styles for this template -->
+    <link href="/css/dashboard.css" rel="stylesheet">
+    
+    <!-- Icon CDN -->
+    <script src="https://unpkg.com/feather-icons"></script>
+
+    
+    <!-- Slick slider -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.css" integrity="sha512-wR4oNhLBHf7smjy0K4oqzdWumd+r5/+6QO/vDda76MW5iug4PT7v86FoEkySIJft3XA0Ae6axhIvHrqwm793Nw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick-theme.min.css" integrity="sha512-17EgCFERpgZKcm0j0fEq1YCJuyAWdz9KUtv1EjVuaOz8pDnh/0nZxmU6BBXwaaxqoi9PQXnRWqlcDB027hgv9A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <script>
+      function mining_machine(mining_completion_date, displayMining, 
+      displayTimer, confirmDate, miningUnit, investmentAmount, 
+      paidOut, transferMiningId, miningBal){
+
+        
+        // console.log(mining_completion_date);
+        // console.log(displayMining);
+        // console.log(displayTimer);
+        // console.log(paidOut);
+
+
+          // Check if mining has completed
+        if (new Date(mining_completion_date) - new Date() >= 0) {
+          setInterval(() => {
+           
+            miningBal = miningBal + parseFloat(miningUnit);
+            // console.log(miningBal);
+            document.getElementById(displayMining).innerHTML = miningBal.toFixed(5);
+
+
+            let time_count = "Active mining";
+
+            if (+new Date(mining_completion_date) - +new Date() > 0) {
+              // Count down timer
+              const timer = {
+                d: Math.floor(((+new Date(mining_completion_date) - +new Date()) / (1000 * 60 * 60 * 24))),
+                h: Math.floor(((+new Date(mining_completion_date) - +new Date()) / (1000 * 60 * 60)) % 24),
+                m: Math.floor(((+new Date(mining_completion_date) - +new Date()) / 1000 / 60) % 60),
+                s: Math.floor(((+new Date(mining_completion_date) - +new Date()) / 1000) % 60),
+              };
+              time_count = Object.keys(timer).map(part => {
+              return `${timer[part]}`+ part;  
+              }).join(" : ")
+            }
+            // Display count down in btn
+            document.getElementById(displayTimer).innerHTML = time_count; 
+
+          }, 1000);
+
+          // Mining Continue 
+          miningBal = (parseInt(new Date().getTime()/1000 - new Date(confirmDate).getTime()/1000) * parseFloat(miningUnit)+parseFloat(investmentAmount));
+        }
+        else{
+          // Display total mining
+          document.getElementById(displayMining).innerHTML = paidOut;
+
+          // Check if the mining is up to a month
+          document.getElementById(displayTimer).addEventListener('click', (e) => {
+            // Redirect to mining deposit;
+            window.location.href = '/user/init-deposit';
+          })
+        }
+
+
+
+        // Transfer completed mining session
+        document.getElementById(transferMiningId).addEventListener('click', (e) => {
+          e.preventDefault();
+          // const mining_id = e.target.getAttribute("data-mining-id")
+          // console.log(mining_id);
+
+            // Check if the mining session has ended 
+            if ( new Date() >= new Date(mining_completion_date)) {
+
+              fetch('/user/transfer-mining', {
+                  method: 'POST', // *GET, POST, PUT, DELETE, etc.
+                  headers: {
+                      'Content-Type': 'application/json'
+                      // 'Content-Type': 'application/x-www-form-urlencoded',
+                  },
+                  body: JSON.stringify({mining_id: e.target.getAttribute("data-mining-id")})
+              })
+              .then(res => res.json())
+              .then(data => {
+                  console.log(data);
+
+                  if (data.success) {
+                      $(document).ready(() =>{
+                          $('.toast-body').html(data.success);
+                          $('.toast').css('background-color', 'green');
+                          $('.toast').toast('show');
+                      });
+
+                      setInterval(() => {
+                        window.location.href = '/user/account';
+                      }, 1000);
+                  }
+                  // Check server errors
+                  if (data.error) {
+                      $(document).ready(() =>{
+                          $('.toast-body').html(data.error);
+                          $('.toast').css('background-color', 'red');
+                          $('.toast').toast('show');
+                      });
+
+                  }
+              })
+              .catch(e => {
+                  $(document).ready(() =>{
+                      $('.toast-body').html('Something went wrong. Please try again');
+                      $('.toast').css('background-color', 'red');
+                      $('.toast').toast('show');
+                  });
+              })
+
+            }
+            else{
+              $(document).ready(() =>{
+                $('.toast-body').html('Your mining session has not ended');
+                $('.toast').css('background-color', 'red');
+                $('.toast').toast('show');
+              });
+            }
+
+        })
+
+      }
+    
+    
+
+
+      // Promo withdrawal count down
+      function promo_Withdrawal_countDown(promoDueDay, counterDisplay, promoTransferBtn){
+        setInterval(() => {
+          let countDown = "Promo Due";
+
+          if (+new Date(promoDueDay) - +new Date() > 0) {
+            // Count down timer
+            const startTimer = {
+              d: Math.floor(((+new Date(promoDueDay) - +new Date()) / (1000 * 60 * 60 * 24))),
+              h: Math.floor(((+new Date(promoDueDay) - +new Date()) / (1000 * 60 * 60)) % 24),
+              m: Math.floor(((+new Date(promoDueDay) - +new Date()) / 1000 / 60) % 60),
+              s: Math.floor(((+new Date(promoDueDay) - +new Date()) / 1000) % 60),
+            };
+            countDown = Object.keys(startTimer).map(part => {
+            return `${startTimer[part]}`+ part;  
+            }).join(" : ")
+          }
+          // console.log(countDown);
+            // Display count down in btn
+            document.getElementById(counterDisplay).innerHTML = countDown
+        }, 1000);
+
+
+        // Transfer promo
+
+        document.getElementById(promoTransferBtn).addEventListener('click', (event) => {
+          event.preventDefault();
+          const promo_id = event.target.getAttribute("data-promo-id");
+
+            // Check if the mining session has ended 
+            if ( new Date() >= new Date(promoDueDay)) {
+
+              fetch('/user/transfer-promo', {
+                  method: 'POST', // *GET, POST, PUT, DELETE, etc.
+                  headers: {
+                      'Content-Type': 'application/json'
+                      // 'Content-Type': 'application/x-www-form-urlencoded',
+                  },
+                  body: JSON.stringify({promo_id: event.target.getAttribute("data-promo-id")})
+              })
+              .then(res => res.json())
+              .then(data => {
+                  console.log(data);
+
+                  if (data.success) {
+                      $(document).ready(() =>{
+                          $('.toast-body').html(data.success);
+                          $('.toast').css('background-color', 'green');
+                          $('.toast').toast('show');
+                      });
+
+                      setInterval(() => {
+                        window.location.href = '/user/account';
+                      }, 1000);
+                  }
+                  // Check server errors
+                  if (data.error) {
+                      $(document).ready(() =>{
+                          $('.toast-body').html(data.error);
+                          $('.toast').css('background-color', 'red');
+                          $('.toast').toast('show');
+                      });
+
+                  }
+              })
+              .catch(e => {
+                  $(document).ready(() =>{
+                      $('.toast-body').html('Something went wrong. Please try again');
+                      $('.toast').css('background-color', 'red');
+                      $('.toast').toast('show');
+                  });
+              })
+
+            }
+            else{
+              $(document).ready(() =>{
+                $('.toast-body').html('Your promo withdrawal is not due yet.');
+                $('.toast').css('background-color', 'red');
+                $('.toast').toast('show');
+              });
+            }
+
+        })
+
+      }
+    </script>
+  </head>
+  <body>
+    
+    <!-- Include navbar -->
+    <%- include('../snippets/main_navbar.ejs') %> 
+
+    <% var context; %> 
+
+    <div class="container-fluid" >
+      <div class="row">
+
+        <!-- Include sidebar -->
+        <%- include('../snippets/sidebar.ejs') %> 
+
+        <!-- Notice  -->
+        <div class="table-responsive row" >
+          <% if (context.notice) { %>
+            <div class="col-lg-6 col-md-6 col-sm-12">
+              <div class="notice">
+                  <% context.notice.forEach(n => { %>
+                    <div class="alert alert-primary alert-dismissible fade show">
+                      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                      <h5><%= n.title %></h5>
+                      <p class=""><%= n.comment %></p>
+                    </div>
+                  <% }) %>
+              </div>
+            </div>
+          <% } %>
+
+
+          <!-- Comment -->
+          <% if (context.comments) { %>
+            <div class="col-lg-6 col-md-6 col-sm-12 mx-auto">
+              <div class="">
+                <% context.comments.forEach(comment => { %>
+                  <div class="alert alert-success alert-dismissible fade show">
+                    <p class=""><%= comment.comment %></p>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                  <% }) %>
+              </div>
+            </div>
+          <% } %>
+          
+        </div>
+
+
+        <!-- Promo plan  -->
+        <div class="table-responsive row " >
+          <% if (context.promo_count > 0) { %>
+              <div class="col-lg-6 col-md-6 col-sm-12">
+                <div class="alert alert-info alert-dismissible fade show">
+                  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                  <h4 class="text-center">Promo! Promo!! Promo!!!</h4>
+                  <p class="fw-bold">
+                    We're offering a special promotion package for 
+                    our users. 
+                    Simply click on the link below and make your first deposit 
+                    to join the promo.
+                  </p>
+
+                  <div class="text-center">
+                    <a href="/user/promo" 
+                    class="btn btn-outline-warning btn-sm fw-bold text-uppercase">Join Promo</a>
+                  </div>
+                </div>
+              </div>
+
+          <% } %>
+        </div>
+
+          <!-- 2nd row -->
+          <div class="table-responsive row" >
+
+            <div class="col-lg-4 col-md-6 col-sm-12 mx-auto">
+
+              <% if (context.mining_sessions) { %>
+                <% context.mining_sessions.forEach(m => { %>
+                  <div class="card mb-4 card-stat">
+                    <div class="card-body">
+                      <div class="">
+                        <div class="card-title pricing-card-title text-start text-dark">
+                          Package: <strong class="text-dark"><small><%= m.active_plan %> </small></strong>
+                        </div>
+                        <div class="">
+                          <p class="card-title h5 pricing-card-title text-dark me-4 mt-2 text-end" id="miner<%= m._id %>">0 </p>
+                          
+                          <small class=" text-end text-dark me-5 " >
+                            Rate: <strong class="text-dark" id=""><%= m.mining_unit %></strong></small>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="text-center mb-3">
+                      <button type="button" class="btn btn-outline-warning btn-sm mt-2 ms-5 float-start text-light" id="timer<%= m._id %>">Deposit</button>
+                      <button type="button" data-mining-id="<%= m._id %>" class="btn btn-outline-warning btn-sm mt-2 me-5 float-end" id="transfer_mining<%= m._id %>">Transfer</button>
+                    </div>
+    
+                  </div>
+
+                  <script>
+                    mining_machine('<%= m.mining_completion_date %>', 'miner'+'<%= m._id %>', 
+                    'timer'+'<%= m._id %>', '<%= m.confirm_date %>', '<%= m.mining_unit %>', 
+                    '<%= m.investment_amount %>', '<%= m.paid_out %>', 'transfer_mining<%= m._id %>',
+                    'bal<%= m._id %>')
+                  </script>
+
+                <% }) %>
+
+
+                <% } else if (context.mining_sessions == undefined) { %>
+                  <div class="card mb-4 card-stat">
+                    <div class="card-body">
+                      <div class="">
+                        <div class="card-title pricing-card-title text-start text-dark">
+                          Package: <strong class="text-dark">No Active Plan</small></strong>
+                        </div>
+                        <div class="">
+                          <p class="card-title h5 pricing-card-title text-dark me-4 mt-2 text-end mining">0.0</p>
+                          <small class=" text-end text-dark me-5 " >
+                            Rate: <strong class="text-dark fw-bold">0.0</strong>
+                          </small>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="text-center mb-3">
+                      <a href="/user/init-deposit" class="btn btn-outline-warning btn-sm mt-2 ms-5 float-start text-light">Make Deposit</a>
+                    </div>
+                  </div>
+              <% } %>
+            </div>
+
+              
+
+            <div class="col-lg-4 col-md-6 col-sm-6 mx-auto">
+
+              <% if (context.promos) { %>
+                <% context.promos.forEach(promo => { %>
+               
+                  <div class="card mb-4 card-stat">
+                    <div class="card-body">
+                      <div class="">
+                        <div class="card-title pricing-card-title text-start text-dark">
+                          <%= promo.promo_title %>
+                        </div>
+                        <h5 class="card-title h5 pricing-card-title text-dark text-end me-5 ">$<%= promo.total_earning %>  </h5>
+                      </div>       
+                    </div>
+                    <div class="text-center mb-3">
+                      <span class="text-dark fw-bold float-start ms-4" id="promo<%= promo._id %>">Due: </span>
+                      <button class="btn btn-outline-warning btn-sm me-3 float-end" 
+                      id="transfer_promo<%= promo._id %>" data-promo-id="<%= promo._id %>">Transfer Promo</button>
+                    </div>  
+                  </div>
+
+                  <!-- Start timer -->
+                  <script>
+                    promo_Withdrawal_countDown('<%= promo.cashout_date%>', 'promo<%= promo._id %>',
+                    'transfer_promo<%= promo._id %>');
+                  </script>
+  
+                <% }) %>
+              <% } %>
+
+
+              <div class="card mb-4 card-stat">
+                <div class="card-body">
+                  <div class="">
+                    <div class="card-title  text-start text-dark">
+                      Classic Wallet
+                      <!-- <img src="/images/digital-wallet.png" class="img-fluid" width="45" height="45" alt="Royal tron coins"> -->
+                    </div>
+                    <h5 class="card-title h5 pricing-card-title text-dark text-end me-5 ">$<%= context.mine_wallet %>  </h5>
+                  </div>       
+                </div>
+                <div class="text-center mb-3">
+                  <a href="/user/reinvestment" class="btn btn-outline-warning btn-sm ms-3 float-start">Reinvest</a>
+                  <a href="/user/withdraw" class="btn btn-outline-warning btn-sm me-3 float-end">withdraw</a>
+                </div>  
+              </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6 col-sm-6 ">
+              <div class="card mb-4 card-stat">
+                <div class="card-body">
+                  <div class="">
+                    <div class="card-title pricing-card-title text-start text-dark">
+                      Referral Link
+                      <!-- <img src="/images/network.png" class="img-fluid" width="45" height="45">  -->
+                    </div>
+                  </div>
+                  <div class="text-center mb-2">
+                    <% if (context.ref_code) { %>
+                      <a href="/?ref_link=<%= context.ref_code %>" 
+                        target="_blank" class="text-decoration-none text-dark fw-bold mb-4" 
+                        id="text">www.xpresscoins.com/?ref_link=<%= context.ref_code %></a> <br><br>
+                      <button class="text-light btn btn-outline-warning btn-sm text-decoration-none" id="copyBtn">Copy link</button>
+                      <div class="text-success" id="sucssMsg"></div>
+                    <% } %>
+                  </div>  
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- second row -->
+          <div class="table-responsive row" >
+            
+            <div class="col-lg-4 col-md-6 col-sm-6">
+              <div class="card mb-4 card-stat">
+                <div class="card-body">
+                  <div class="">
+                    <div class="card-title pricing-card-title text-start text-dark">
+                      Total Earning
+                      <!-- <img src="/images/m2.png" class="img-fluid" width="45" height="45" alt="">  -->
+                      <h5 class="card-title h5 pricing-card-title text-dark text-start me-5 ">$<%= context.total_earning %></h5>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-lg-3 col-md-6 col-sm-6 ">
+              <div class="card mb-4 card-stat">
+                <div class="card-body">
+                  <div class="">
+                    <div class="card-title pricing-card-title text-start text-dark">
+                      Total Withdrawal
+                      <!-- <img src="/images/profit.png" class="img-fluid" width="45" height="45" alt="Royal tron coins">  -->
+                      <h5 class="card-title h5 pricing-card-title text-dark text-start me-5 ">$<%= context.total_withdrawal %></h5>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- <div class="col-lg-4 col-md-6 col-sm-6 ">
+              <div class="card mb-4 rounded-3 card-stat">
+                <div class="card-body">
+                  
+                  <div class="">  
+                    <div class="card-title pricing-card-title text-start text-dark">
+                      Daily Visitors
+                      <img src="/images/visitor.png" class="img-fluid" width="45" height="45" alt="Royal tron coins"> 
+                      <h6 class="card-title pricing-card-title text-dark text-end me-5 current_time">
+                      </h6>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div> -->
+
+          </div>
+        </main>
+      </div>
+    </div>
+
+    <% if (context.error) { %>
+      <script>
+          $(document).ready(() =>{
+            $('.toast-body').html('<%= context.error %>');
+              $('.toast').css('background-color', 'red');
+              $('.toast').toast('show');
+          });
+      </script>
+    <% } %>
+
+    <!-- Include toast -->
+    <%- include('../snippets/toast.ejs') %>
+
+
+
+    <!--  Include copy text -->
+    <%- include('../snippets/copy_text.ejs') %>
+
+    <!-- Include the scripts -->
+    <%- include('../snippets/scripts.ejs') %>
+
+
+  <!-- Live chat -->
+  <%- include('../snippets/live_chat.ejs') %>
+
+    <!-- INitialized feather CDN -->
+    <script>
+      feather.replace()
+    </script>
+
+
+
+
+ <!-- Slick slider -->
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.js" integrity="sha512-eP8DK17a+MOcKHXC5Yrqzd8WI5WKh6F1TIk5QZ/8Lbv+8ssblcz7oGC8ZmQ/ZSAPa7ZmsCU4e/hcovqR8jfJqA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.js" integrity="sha512-HGOnQO9+SP1V92SrtZfjqxxtLmVzqZpjFFekvzZVWoiASSQgSr4cw9Kqd2+l8Llp4Gm0G8GIFJ4ddwZilcdb8A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>  
+
+
+  <script>  
+    $('.notice').slick({
+    dots: true,
+    infinite: true,
+    autoplay: true,
+    autoplaySpeed: 2000,
+    speed: 2500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          infinite: true,
+          dots: true
+        }
+      },
+      {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1
+        }
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1
+        }
+      }
+      // You can unslick at a given breakpoint now by adding:
+      // settings: "unslick"
+      // instead of a settings object
+    ]
+  });
+  </script>
+
+
+ </body>
+</html>

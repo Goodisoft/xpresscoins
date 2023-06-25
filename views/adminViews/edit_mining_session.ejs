@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+  <head>
+   
+    <!-- Include the header -->
+    <%- include('../snippets/meta_data.ejs')  %> 
+
+    <title>Xpresscoins | World Best Mining Company</title>
+    
+    <!-- Custom styles for this template -->
+    <link href="/css/dashboard.css" rel="stylesheet">
+    
+    <!-- Icon CDN -->
+    <script src="https://unpkg.com/feather-icons"></script>
+
+    <!-- Data table cdn -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.0/css/jquery.dataTables.css">
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.0/js/jquery.dataTables.js"></script>
+   
+  </head>
+  <body>
+    
+    <!-- Include navbar -->
+    <%- include('../snippets/main_navbar.ejs') %> 
+
+    <div class="container-fluid" >
+      <div class="row">
+
+        <% var context; %> 
+
+        <!-- Include sidebar -->
+        <%- include('../snippets/sidebar.ejs') %> 
+            <h5 class="text-start h6 text-center">Edit Current Mining Session</h5>
+            <!-- First row -->
+            <div class="table-responsive row card-stat p-4">
+                <div class="col-lg-6 col-md-12 col-sm-12 mx-auto">
+                  
+                  <% if (context.mining) { %>
+                    <form id="edit_mining_session_form">
+                          <div class="mb-3">
+                            <label class="">Username (readonly)</label>
+                            <input type="text" name="name" class="form-control" 
+                            value="<%= context.mining.user.username %>" readonly>
+                          </div>
+
+                          <div class="mb-3">
+                            <label class="">Investment Plan(readonly)</label>
+                            <input type="text" name="plan" class="form-control" 
+                            value="<%= context.mining.active_plan %>" readonly>
+                          </div>
+
+                          <div class="mb-3">
+                            <label class="">Total Pay Out Amount (readonly)</label>
+                            <input type="text" name="paid_out" class="form-control" 
+                            value="<%= context.mining.paid_out %>" readonly>
+                          </div>
+
+                          <div class="mb-3">
+                            <label class="">Investment Amount</label>
+                            <input type="text" name="investment_amount" class="form-control" 
+                            value="<%= context.mining.investment_amount %>">
+                            <small class="text-warning">Changing the investment amount will change payout amount</small>
+
+                          </div>
+
+                          <div class="mb-2">
+                            <label class="">Withdrawal Day (optional)</label>
+                            <input type="text" name="withdrawal_day" class="form-control"  placeholder="e.g 3">
+                            <small class="text-warning">Add new withdrawal day</small>
+                          </div>
+
+                          <div class="mb-3">
+                            <input type="hidden" name="mining_id" class="form-control " value="<%= context.mining._id %>" >
+                          </div>
+
+                          <div class="col">
+                            <label class="">Comment</label>
+                            <textarea name="comment" class="form-control" placeholder="Write your comment" cols="50" rows="5"></textarea>
+                          </div>
+                        
+                        <div class="text-center mt-4 mb-3">
+                        <button type="submit" class="btn btn-outline-warning btn-md">Save Changes</button> 
+                        </div>
+                    </form>
+                    <% } else { %>
+                        <div class="text-center">
+                            <h4>The User downlines have not make deposit yet.</h4>
+                            <p>
+                                When his or her downlines make deposit, his or referral earning will show
+                            </p>
+                        </div>
+                  <% } %>
+                </div>
+        </main>
+      </div>
+    </div>
+
+
+    <!-- Include toast -->
+    <%- include('../snippets/toast.ejs') %>
+
+    <!-- Include the scripts -->
+    <%- include('../snippets/scripts.ejs') %>
+
+
+    <!-- INitialized feather CDN -->
+    <script>
+      feather.replace()
+    </script>
+
+   <!-- Link the submit handler -->
+   <script src="/scripts/edit_mining_session.js"></script>
+
+
+  </body>
+</html>

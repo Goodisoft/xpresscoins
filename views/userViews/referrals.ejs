@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+  <head>
+   
+    <%- include('../snippets/meta_data.ejs')  %> 
+    <!-- custom css -->
+    <title>Xpresscoins | World Best Mining Company</title>
+    <!-- Custom styles for this template -->
+    <link href="/css/dashboard.css" rel="stylesheet">
+    
+    <!-- Icon CDN -->
+    <script src="https://unpkg.com/feather-icons"></script>
+
+    <!-- Data table cdn -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.0/css/jquery.dataTables.css">
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.0/js/jquery.dataTables.js"></script>
+  
+
+  </head>
+  <body class="">
+    
+    <!-- Include navbar -->
+    <%- include('../snippets/main_navbar.ejs') %> 
+
+    <div class="container-fluid" >
+      <div class="row">
+
+            <!-- Include sidebar -->
+            <%- include('../snippets/sidebar.ejs') %> 
+
+          
+              <!-- Start 2nd row -->
+              <div class="table-responsive row " >
+              
+                <!-- Referral history -->
+                <div class="col-lg-10 col-md-12 col-sm-12 mx-auto">
+                    <div class="card mb-4 rounded-3 shadow card-stat">
+                      <div class="card-body">
+                        <div class="">
+                          <span class="card-title h5 pricing-card-title text-start fw-bold text-dark me-4">
+                            Bal: $<%= context.ref_wallet %> 
+                          </span> 
+                          <span class="card-title pricing-card-title float-end fw-bold text-dark mb-4">
+                            Your Team
+                          </span>
+                        </div>
+                        <div class="mt-1">
+                          <a href="/user/withdraw" class="btn btn-outline-warning btn-sm">Withdraw</a>
+                        </div>
+                        <hr>
+
+                        <table class="table text-dark text-center" id="user_table">
+                            <thead>
+                            <tr>
+                                <th scope="col">Level</th>
+                                <th scope="col">Username</th>
+                            </tr>
+                            </thead>
+                            <tbody >
+                            <% if (context.downlines) { %>
+                            <% context.downlines.forEach(d => { %>
+                              <tr>
+                                <% if (d.referral.direct_referral === context.user) { %>
+                                  
+                                    <th scope="row">Direct downline</th>
+                                <% } else if (d.referral.level1_code === context.user) { %>
+                                    <th scope="row">Indirect downline</th>
+                                <% } %>
+
+                                <td><%= d.username %> </td>
+                                </tr>
+    
+                            <% }) %>
+                            <% } %>
+                            </tbody>
+                        </table>
+                      </div>
+                    </div>
+                </div>
+              </div>
+              <!-- End 2nd row -->
+
+            </div>
+            <!-- End 2nd row -->
+
+        </main>
+      </div>
+    </div>
+
+
+    <!--  Include toast -->
+    <%- include('../snippets/toast.ejs') %> 
+
+
+    <!-- INitialized feather CDN -->
+    <script>
+      feather.replace();
+
+      // Data table CDN initialisation
+      $(document).ready( function () {
+        $('#user_table').DataTable();
+      } );
+    </script>
+
+
+    <!-- Include the scripts -->
+    <%- include('../snippets/scripts.ejs') %>
+
+
+
+
+  <!-- Live chat -->
+  <%- include('../snippets/live_chat.ejs') %>    
+  
+  </body>
+</html>

@@ -1,0 +1,246 @@
+<!doctype html>
+<html lang="en">
+  <head>
+   
+    <%- include('../snippets/meta_data.ejs')  %> 
+    <!-- custom css -->
+    <title>Xpresscoins | World Best Mining Company</title>
+    
+    <!-- Custom styles for this template -->
+    <link href="/css/dashboard.css" rel="stylesheet">
+    
+    <!-- Icon CDN -->
+    <script src="https://unpkg.com/feather-icons"></script> 
+
+    <!-- Data table cdn -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.0/css/jquery.dataTables.css">
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.0/js/jquery.dataTables.js"></script>
+   
+  </head>
+  <body>
+    
+    <!-- Include navbar -->
+    <%- include('../snippets/main_navbar.ejs') %> 
+
+    <div class="container-fluid" >
+      <div class="row">
+
+        <% var context; %> 
+
+        <!-- Include sidebar -->
+        <%- include('../snippets/sidebar.ejs') %> 
+            <!-- First row -->
+            <h5 class="text-start h6 float-end">Account History</h5>
+            <div class="mb-3">
+                <a href="#" class="btn-sm tab-btn active mt-2 btn" id="mining_deposit_btn">Deposit</a>
+                <a href="#" class="btn-sm tab-btn mt-2 btn" id="mining_withdrawal_btn">Withdrawal</a>
+                <a href="#" class="btn-sm tab-btn mt-2 btn" id="referral_withdrawal_btn">Team Withdrawal</a>
+            </div>
+
+            <div class="table-responsive row card-stat p-4">
+                
+                <!-- Mining deposit table -->
+                <div class="mining_deposit ">
+                    <h5 class="text-start h6 text-center">Deposit History</h5>
+
+                    <table class="table table-hover table-sm" id="mining_deposit">
+                        <thead>
+                            <tr>
+                                <th scope="col">Currency</th>
+                                <th scope="col">Amount</th>
+                                <th scope="col">status</th>
+                                <th scope="col">Date</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        <% if (context.mining_deposit) { %>
+
+                        <% context.mining_deposit.forEach(w => { %>
+
+                            <!-- Format the date -->
+                            <% var date = new Date(w.deposit_date); %>
+
+                            <tr>
+                            <td><%= w.currency %> </td>
+                            <td>$<%= w.amount %> </td>
+                            <% if (w.isConfirm) { %>
+                                <td class="text-success">Confirmed </td>
+                            <% } else { %>
+                                <td class="text-danger">Pending </td>
+                            <% } %>
+                            <td><%= date.toDateString(); %> </td>
+                            </tr>
+
+                        <% }) %>
+                        <% } %>
+                            
+                        </tbody>
+                    </table>
+                </div>
+
+
+                <!-- Mining withdrawal table -->
+                <div class="mining_withdrawal">
+
+                    <h5 class="text-start h6 text-center">Withdrawal History</h5>
+
+                    <table class="table table-hover table-sm" id="mining_withdrawal">
+                        <thead>
+                            <tr>
+                                <th scope="col">Currency</th>
+                                <th scope="col">Amount</th>
+                                <th scope="col">status</th>
+                                <th scope="col">Date</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        <% if (context.mining_withdrawal) { %>
+
+                        <% context.mining_withdrawal.forEach(w => { %>
+
+                            <!-- Format the date -->
+                            <% var date = new Date(w.withdrawal_date); %>
+
+                            <tr>
+                            <td><%= w.currency %> </td>
+                            <td>$<%= w.amount %> </td>
+                            <% if (w.isPaid) { %>
+                                <td class="text-success">Paid </td>
+                            <% } else { %>
+                                <td class="text-danger">Processing</td>
+                            <% } %>
+                            <td><%= date.toDateString(); %> </td>
+                            </tr>
+
+                        <% }) %>
+                        <% } %>
+                            
+                        </tbody>
+                    </table>
+                </div>
+
+
+                <!-- Referral withdrawal -->
+                <div class="referral_withdrawal">
+
+                    <h5 class="text-start h6 text-center">Referral Withdrawal</h5>
+
+                    <table class="table table-hover table-sm" id="referral_table">
+                        <thead>
+                            <tr>
+                                <th scope="col">Currency</th>
+                                <th scope="col">Amount</th>
+                                <th scope="col">status</th>
+                                <th scope="col">Date</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        <% if (context.ref_withdrawal) { %>
+
+                        <% context.ref_withdrawal.forEach(w => { %>
+
+                            <!-- Format the date -->
+                            <% var date = new Date(w.withdrawal_date); %>
+
+                            <tr>
+                            <td>$<%= w.amount %> </td>
+                            <td><%= w.currency %> </td>
+                            <% if (w.isPaid) { %>
+                                <td class="text-success">Paid </td>
+                            <% } else { %>
+                                <td class="text-danger">Processing</td>
+                            <% } %>
+                            <td><%= date.toDateString(); %> </td>
+                            </tr>
+
+                        <% }) %>
+                        <% } %>
+                            
+                        </tbody>
+                    </table>
+                </div>
+        </main>
+      </div>
+    </div>
+
+
+    <!-- Include toast -->
+    <%- include('../snippets/toast.ejs') %>
+
+    <!-- Include the scripts -->
+    <%- include('../snippets/scripts.ejs') %>
+
+
+  <!-- Live chat -->
+  <%- include('../snippets/live_chat.ejs') %>
+
+    <!-- INitialized feather CDN -->
+    <script>
+      feather.replace()
+    </script>
+
+<!-- Handle error and success message -->
+    <% if (context.error) { %>
+      <script>
+        
+          $(document).ready(() =>{
+            $('.toast-body').html('<%= context.error %>');
+              $('.toast').css('background-color', 'red');
+              $('.toast').toast('show');
+          });
+
+          setInterval(() => {
+            window.location.href = '/user/account';
+          }, 2000);
+      </script>
+    <% } %>
+
+    <% if (context.success) { %>
+      <script>
+          $(document).ready(() =>{
+            $('.toast-body').html('<%= context.success %>');
+              $('.toast').css('background-color', 'green');
+              $('.toast').toast('show');
+          });
+
+          setInterval(() => {
+            window.location.href = '/account/referral-withdrawals';
+          }, 2000);
+      </script>
+    <% } %>
+
+
+    <!-- Data table CDN initialisation-->
+    <script>
+        // mining deposit
+      $(document).ready( function () {
+          $('#mining_deposit').DataTable();
+      } );
+
+    //   STaking deposit
+      $(document).ready( function () {
+          $('#staking_deposit').DataTable();
+      } );
+
+    //   Mining withdrawal
+      $(document).ready( function () {
+          $('#mining_withdrawal').DataTable();
+      } );
+
+    //   staking withdrawal
+      $(document).ready( function () {
+          $('#staking_withdrawal').DataTable();
+      } );
+
+    //   Referral withdrawal table
+      $(document).ready( function () {
+          $('#referral_table').DataTable();
+      } );
+    </script>
+
+    <script src="/scripts/history.js"></script>
+
+
+    
+  </body>
+</html>

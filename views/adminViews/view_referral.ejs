@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+  <head>
+   
+    <%- include('../snippets/meta_data.ejs')  %> 
+    <!-- custom css -->
+
+    <title>Xpresscoins | World Best Mining Company</title>
+    
+    <!-- Custom styles for this template -->
+    <link href="/css/dashboard.css" rel="stylesheet">
+    
+    <!-- Icon CDN -->
+    <script src="https://unpkg.com/feather-icons"></script>
+
+    <!-- Data table cdn -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.0/css/jquery.dataTables.css">
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.0/js/jquery.dataTables.js"></script>
+  
+
+  </head>
+  <body class="">
+    
+    <!-- Include navbar -->
+    <%- include('../snippets/main_navbar.ejs') %> 
+
+    <div class="container-fluid" >
+      <div class="row">
+
+            <!-- Include sidebar -->
+            <%- include('../snippets/sidebar.ejs') %> 
+
+            <h5 class="text-center h6">View Referral</h5>
+
+              <!-- Start 2nd row -->
+              <div class="table-responsive row " >
+              
+                <!-- Referral history -->
+                <div class="col-lg-10 col-md-12 col-sm-12 mx-auto">
+                    <div class="card mb-4 rounded-3 shadow card-stat">
+                      <div class="card-body">
+                       
+
+                        <table class="table text-dark text-center" id="user_table">
+                            <thead>
+                            <tr>
+                              <th scope="col">Users</th>
+                              <th scope="col">Direct Downlines</th>
+                              <th scope="col">Indirect Downlines</th>
+                              <th scope="col">Total Direct Downlines</th>
+                              <th scope="col">Total Direct Downlines</th>
+                              <th scope="col" class="text-center">Action</th>
+
+                            </tr>
+                            </thead>
+                            <tbody >
+                            <% if (context.downlines) { %>
+
+                                <% Object.keys(context.downlines).forEach(function(username) { %>
+                                  <tr>
+                                    <td class="fw-bold"><%= context.downlines[username].user %></td>
+                                    <td class="text-start">
+                                        <% context.downlines[username].direct_downlines.forEach(function(directDownline) { %>
+                                          <li><%= directDownline %></li>
+                                        <% }); %>
+                                    </td>
+                                    <td class="text-start">
+                                      <% context.downlines[username].indirect_downlines.forEach(function(indirectDownline) { %>
+                                        <li><%= indirectDownline %></li>
+                                      <% }); %>
+                                    </td>
+                                    <td><%= context.downlines[username].direct_downlines.length %></td>
+                                    <td> <%= context.downlines[username].indirect_downlines.length %></td>
+  
+                                    <td>
+                                      <a href="/account/edit-referral-bal?wallet_code=<%= context.downlines[username].user %>" class="btn btn-warning btn-sm">Edit Wallet</a>
+                                    </td>
+                                  </tr>
+                                <% }); %>
+                               
+
+                            <% } %>
+                            </tbody>
+                        </table>
+                      </div>
+                    </div>
+                </div>
+              </div>
+              <!-- End 2nd row -->
+
+            </div>
+            <!-- End 2nd row -->
+
+        </main>
+      </div>
+    </div>
+
+
+    <!--  Include toast -->
+    <%- include('../snippets/toast.ejs') %> 
+
+
+    <!-- Include the scripts -->
+    <%- include('../snippets/scripts.ejs') %>
+
+    <!-- INitialized feather CDN -->
+    <script>
+      feather.replace();
+
+      // Data table CDN initialisation
+      $(document).ready( function () {
+          $('#user_table').DataTable();
+      } );
+
+    </script>
+
+  </body>
+</html>

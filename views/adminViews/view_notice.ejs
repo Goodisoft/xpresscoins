@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+  <head>
+   
+    <!-- Include the header -->
+    <%- include('../snippets/meta_data.ejs')  %> 
+
+    <title>Xpresscoins | World Best Mining Company</title>
+    
+    <!-- Custom styles for this template -->
+    <link href="/css/dashboard.css" rel="stylesheet">
+    
+    <!-- Icon CDN -->
+    <script src="https://unpkg.com/feather-icons"></script>
+
+    <!-- Data table cdn -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.0/css/jquery.dataTables.css">
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.0/js/jquery.dataTables.js"></script>
+  
+  </head>
+  <body>
+    
+    <!-- Include navbar -->
+    <%- include('../snippets/main_navbar.ejs') %> 
+
+    <div class="container-fluid" >
+      <div class="row">
+
+        <% var context; %> 
+
+       
+        <!-- Include sidebar -->
+        <%- include('../snippets/sidebar.ejs') %> 
+            <h5 class="text-center h6">View Notices <span class="ms-4"><a class="btn btn-warning btn-sm" href="/account/notice">Publish New Notice</a></span></h5>
+            <!-- First row -->
+            <div class="table-responsive row card-stat p-4">
+                <table class="table table-hover table-sm" id="user_table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Author</th>
+                            <th scope="col">Title</th>
+                            <th scope="col">Comment</th>
+                            <th scope="col">Published Date</th>
+                            <th scope="col">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                      <% if (context.notices) { %>
+
+                       <% context.notices.forEach(n => { %>
+
+                            <% var date = new Date(n.date); %>
+
+                            <tr>
+                                <td><%= n.admin.username %> </td>
+                                <td><%= n.title %>%</td>
+                                <td><%= n.comment %></td>
+                                <td><%= date.toDateString() %> </td>
+                                <td>
+                                    <a href="/account/delete-notice?notice_id=<%= n._id %>" 
+                                        class="btn btn-outline-success btn-sm">
+                                        Delete
+                                    </a>
+                                </td>
+                                
+                            </tr>
+
+                       <% }) %>
+                      <% } %>
+                       
+                    </tbody>
+                </table>
+
+        </main>
+      </div>
+    </div>
+
+    <!-- Include toast -->
+    <%- include('../snippets/toast.ejs') %>
+
+    <!-- Include the scripts -->
+    <%- include('../snippets/scripts.ejs') %>
+
+
+    <!-- INitialized feather CDN -->
+    <script>
+      feather.replace()
+    </script>
+
+
+<% if (context.error) { %>
+  <script>
+    
+      $(document).ready(() =>{
+        $('.toast-body').html('<%= context.error %>');
+          $('.toast').css('background-color', 'red');
+          $('.toast').toast('show');
+      });
+
+      setInterval(() => {
+        window.location.href = '/account/home';
+      }, 2000);
+  </script>
+<% } %>
+
+<% if (context.success) { %>
+  <script>
+      $(document).ready(() =>{
+        $('.toast-body').html('<%= context.success %>');
+          $('.toast').css('background-color', 'rgb(13, 152, 186, .8)');
+          $('.toast').toast('show');
+      });
+
+      setInterval(() => {
+        window.location.href = '/account/view-notice';
+      }, 2000);
+  </script>
+<% } %>
+
+
+     <!-- Data table CDN initialisation-->
+     <script>
+        $(document).ready( function () {
+            $('#user_table').DataTable();
+        } );
+    </script>
+  </body>
+</html>

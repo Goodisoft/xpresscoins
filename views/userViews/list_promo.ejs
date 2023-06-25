@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+  <head>
+   
+    <%- include('../snippets/meta_data.ejs')  %> 
+    <!-- custom css -->
+    <title>Xpresscoins | World Best Mining Company</title>
+    
+    <!-- Custom styles for this template -->
+    <link href="/css/dashboard.css" rel="stylesheet">
+    
+    <!-- Icon CDN -->
+    <script src="https://unpkg.com/feather-icons"></script>
+
+  </head>
+  <body class="">
+    
+    <!-- Include navbar -->
+    <%- include('../snippets/main_navbar.ejs') %> 
+
+    <div class="container-fluid" >
+      <div class="row">
+
+            <!-- Include sidebar -->
+            <%- include('../snippets/sidebar.ejs') %> 
+
+            <% var context; %> 
+            
+            <!-- Start 2nd row -->
+            <div class="table-responsive row mt-3  shadow card-stat" >
+                <!-- Promo plans -->               
+                    <% if (context.promos) { %>
+                        <% context.promos.forEach(plan => { %>
+                            <div class="col-lg-4 col-md-6 col-sm-12 mb-3 mt-3">
+                                <div class="card plan-card card-stat">
+                                    <h5 class="card-header text-center p-4 bg-primary text-light">
+                                    <%= plan.title %>
+                                    </h5>
+                                    <div class="card-body text-center">
+                                        <h6 class="card-title fw-bold"> <%= plan.profit %>% profit per hour</h6>
+                                        <p class="card-text">Duration: <%= plan.duration %> Hours</p>
+                                        <p class="card-text">Min-Max: $<%= plan.activation %> </p>
+                                        
+                                        <div class="text-center mt-2">
+                                            <a href="/user/promo-payment/?promo_id=<%= plan._id %>" 
+                                                class="btn btn-outline-warning">Join Now</a>
+                                        </div>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                        <% }) %>
+                    <% } %>
+            </div>
+        </main>
+      </div>
+    </div>
+
+
+    <!--  Include toast -->
+    <%- include('../snippets/toast.ejs') %> 
+
+    <!-- Include the scripts -->
+    <%- include('../snippets/scripts.ejs') %>
+
+
+    <!-- INitialized feather CDN -->
+    <script>
+      feather.replace();
+    </script>
+
+    <script src="/scripts/withdrawal.js"></script>
+    <script src="/scripts/staking_withdrawal.js"></script>
+
+
+  <!-- Live chat -->
+  <%- include('../snippets/live_chat.ejs') %>
+    
+  </body>
+</html>

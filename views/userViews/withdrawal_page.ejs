@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="en">
+  <head>
+   
+    <%- include('../snippets/meta_data.ejs')  %> 
+    <!-- custom css -->
+    <title>Xpresscoins | World Best Mining Company</title>
+    
+    <!-- Custom styles for this template -->
+    <link href="/css/dashboard.css" rel="stylesheet">
+    
+    <!-- Icon CDN -->
+    <script src="https://unpkg.com/feather-icons"></script>
+
+  </head>
+  <body class="">
+    
+    <!-- Include navbar -->
+    <%- include('../snippets/main_navbar.ejs') %> 
+
+    <div class="container-fluid" >
+      <div class="row">
+
+            <!-- Include sidebar -->
+            <%- include('../snippets/sidebar.ejs') %> 
+
+            <% var context; %> 
+            
+            <!-- Start 2nd row -->
+            <div class="table-responsive row " >
+
+              <div class="text-start mb-4 p-2">
+                <a class="ms-3 mt-2 btn" id="mining_withdrawal_page" href="#">Mining withdrawal</a>  
+                <a class="ms-3 mt-2 btn" id="referral_withdrawal_page" href="#">Referral Withdrawal</a>
+              </div>
+              
+              <div class="col-lg-6 col-md-12 col-sm-12 mx-auto">
+
+                <!-- Mining withdrawal -->
+                <div class="card mb-4 rounded-3 shadow card-stat withdrawal_div">
+                  <div class="card-body">
+                  <h6 class="card-title text-center text-dark">Withdrawal</h6>
+
+                    <form id="init_withdrawal">
+                      <div class="row mt-4">
+                        <div class="col">
+                          
+                          <div class="mb-4">
+                            <select name="currency" class="form-select" required>
+                              <option value="">----- Please Select currency -----</option>
+                              <option value="BTC">Bitcoin</option>
+                              <option value="USDT">Tether USD</option>
+                              <option value="ETH">Ethereum</option>
+                            </select>
+                            <div class="text-danger mt-2" id="currency_Err"></div>
+                          </div>
+                          
+                          <div class="input-group">
+                            <span class="input-group-text">$</span>
+                            <input type="text" name="amount" class="form-control form-control-md" 
+                            placeholder="Amount" required>
+                            <div class="text-danger mt-2" id="amountErr"></div>
+                          </div>
+                          <div class="text-center mb-3">
+                            <small class="text-dark me-5">Amount in dollars (500) </small>
+                            <small class="text-muted">Available balance <span class="text-dark fw-bold">$<%= context.mining_bal %></span> </small>
+                          </div>
+
+                          <input type="text" name="walletAddress" class="form-control form-control-md" 
+                          placeholder="Receiver's wallet address" required>
+                          <div class="text-danger mt-2" id="address_Err"></div>
+                        </div>
+                        
+                      </div>
+                      
+                      <div class="text-center mt-4 mb-3">
+                        <button type="submit" class="btn btn-outline-warning btn-md">Withdraw</button> 
+                      </div>
+                    </form>
+                     
+                  </div>
+                </div>
+                <!-- Mining withdrawal end here -->
+
+
+                <!-- Referral withdrawal -->
+                <div class="card mb-4 rounded-3 shadow card-stat referral_withdraw_div">
+                  <div class="card-body">
+                  <h6 class="card-title text-center text-dark">Referral withdrawal</h6>
+
+                    <form id="referral_withdrawal_form">
+                      <div class="row mt-4">
+                        <div class="col">
+
+                          <div class="mb-4">
+                            <select name="currency" class="form-select" required>
+                              <option value="">----- Please Select currency -----</option>
+                              <option value="BTC">Bitcoin</option>
+                              <option value="USDT">Tether USD</option>
+                              <option value="ETH">Ethereum</option>
+
+                            </select>
+                            <div class="text-danger mt-2" id="coinErr"></div>
+                          </div>
+
+                          <div class="mb-3">
+                            <input type="text" name="withdrawal_amount" class="form-control form-control-md" 
+                            placeholder="Amount" >
+                            <div class="text-danger mt-1" id="wit_amount_err"></div>
+                            <div class="text-center">
+                              <small class="text-muted">Available balance <span class="text-dark fw-bold">$<%= context.ref_bal %></span> </small>
+                            </div>
+                          </div>
+
+                          <div class="mb-3">
+                            <input type="text" name="address" class="form-control form-control-md" 
+                            placeholder=" Receiver's wallet address" >
+                            <div class="text-danger mt-2" id="addressError"></div>
+                          </div>
+                        </div>
+                      </div>
+                      
+                      <div class="text-center mt-4 mb-3">
+                        <button type="submit" class="btn btn-outline-warning btn-md">Withdraw</button> 
+                      </div>
+                    </form>
+                     
+                  </div>
+                </div>
+                <!-- Referral withdrawal end here -->
+
+              </div>
+            </div>
+            <!-- End 2nd row -->
+
+        </main>
+      </div>
+    </div>
+
+
+    <!--  Include toast -->
+    <%- include('../snippets/toast.ejs') %> 
+
+    <!-- Include the scripts -->
+    <%- include('../snippets/scripts.ejs') %>
+
+
+    <!-- INitialized feather CDN -->
+    <script>
+      feather.replace();
+
+      
+    </script>
+
+    <script src="/scripts/withdrawal.js"></script>
+    <script src="/scripts/staking_withdrawal.js"></script>
+
+
+  <!-- Live chat -->
+  <%- include('../snippets/live_chat.ejs') %>
+    
+  </body>
+</html>

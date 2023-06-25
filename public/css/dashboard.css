@@ -1,0 +1,285 @@
+body {
+  min-height: 100vh;
+  height: 100%;
+  font-size: .875rem;
+  /* background-color: #edf1ff !important; */
+  background-image: url("../images/features/bg1.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+
+.feather {
+  width: 16px;
+  height: 16px;
+  vertical-align: text-bottom;
+}
+.edit-icon{
+  width: 20px !important;
+  height: 20px !important;
+  text-align: center;
+}
+
+/*
+ * Sidebar
+ */
+
+.sidebar {
+  position: fixed;
+  top: 0;
+  /* rtl:raw:
+  right: 0;
+  */
+  bottom: 0;
+  /* rtl:remove */
+  left: 0;
+  z-index: 100; /* Behind the navbar */
+  padding: 48px 0 0; /* Height of navbar */
+  /* background-color: rgb(235, 235, 235) !important; */
+  border: 1px solid #ced5ea !important;
+  background-color: #e0e5f6 !important;
+}
+
+@media (max-width: 767.98px) {
+  .sidebar {
+    top: 1.2rem;
+  }
+}
+
+.sidebar-sticky {
+  position: relative;
+  top: 0;
+  height: calc(100vh - 48px);
+  padding-top: .5rem;
+  overflow-x: hidden;
+  overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
+}
+
+.sidebar .nav-link {
+  font-weight: 500;
+  font-size: 15px;
+  color: #000;
+  margin-bottom: 10px;
+}
+.sidebar .nav-link:hover {
+  background-color: #24126A !important;
+  color: #fff;
+  border-top-right-radius: 12px;
+  border-bottom-right-radius: 12px;
+
+}
+
+.sidebar .nav-link .feather {
+  margin-right: 4px;
+  color: #727272;
+}
+
+.sidebar .nav-link:hover .feather,
+.sidebar .nav-link.active .feather {
+  color: inherit;
+}
+
+.sidebar-heading {
+  font-size: .75rem;
+  text-transform: uppercase;
+}
+
+/*
+ * Navbar
+ */
+.navbar{
+  background-color: #e0e5f6 !important;
+  /* border: 1px solid rgba(180, 180, 180, 0.6) !important; */
+}
+.navbar-brand {
+  padding-top: .75rem;
+  padding-bottom: .75rem;
+  font-size: 1rem;
+  background-color: #e0e5f6 !important;
+  box-shadow: inset -1px 0 0 rgba(0, 0, 0, .25);
+}
+
+.navbar .navbar-toggler {
+  top: 1rem;
+  right: 1rem;
+  background-color: #00bbf0 !important;
+}
+.card-stat{
+  background-color: #c9d3f6;
+  border-radius: 0px !important;
+  border: 0px solid !important;
+  box-shadow: 0 5px 8px rgb(180, 180, 180) !important;
+}
+.custom_card{
+  height: 160px !important;
+  background-color: #c9d3f6;
+  border-radius: 0px !important;
+  border: 0px solid !important;
+  box-shadow: 0 5px 8px rgb(180, 180, 180) !important;
+}
+.a-link{
+  color: rgb(255, 212, 199);
+}
+.a-link:hover{
+  color: #f1f1f1; 
+}
+.sign-out{
+  color: #000;
+}
+.sign-out:hover{
+  color: rgb(253, 72, 48);;
+}
+.content-section{
+  background-color: #dfdfdf;
+}
+.shadow{
+  box-shadow: none !important;
+}
+.package{
+  color: rgb(253, 72, 48);
+}
+.text-warning{
+  color: #FCD535 !important;
+}
+.bg-warning{
+  background-color: #f3ed54 !important;
+}
+
+.form-control{
+  border-top: none !important;
+  border-left: none;
+  border-right: none;
+  border-radius: 0px;
+  background-color: #edf1ff !important;
+}
+.form-control:focus{
+  box-shadow: none !important;
+}
+.form-select{
+  box-shadow: none !important;
+  border-top: 0px solid !important;
+  border-right: 0px solid !important;
+  border-left: 0px solid !important;
+  border-radius: 0px !important;
+  background-color: #edf1ff !important;
+}
+.confirm_deposit{
+  display: none;
+}
+
+.confirm_Staking_withdraw{
+  display: none;
+}
+.Staking_withdraw_div{
+  display: none;
+}
+.referral_withdraw_div{
+  display: none;
+}
+.confirm_referral_withdraw{
+  display: none;
+}
+
+.btc_address{
+  display: none;
+}
+.eth_address{
+  display: none;
+}
+.ltc_address{
+  display: none;
+}
+.doge_address{
+  display: none;
+}
+.usdt_erc20_address{
+  display: none;
+}
+.staking_deposit{
+  display: none;
+}
+.mining_withdrawal{
+  display: none;
+}
+.staking_withdrawal{
+  display: none;
+}
+.referral_withdrawal{
+  display: none;
+}
+.nft_withdraw_div{
+  display: none;
+}
+.confirm_nft_withdraw{
+  display: none;
+}
+.bg-warning{
+  background-color: #ffaf02 !important;
+}
+.btn-outline-warning{
+  border: 1px solid #f7f7f7 !important;
+  background-color:  #24126A !important;
+  color: #fff;
+}
+.btn-warning{
+  border: 1px solid rgb(247, 247, 247) !important;
+  background-color:  #24126A !important;
+  color: #fff;
+}
+.tab-btn{
+  border-top: 0px;
+  border-right: 0px;
+  border-left: 0px;
+  border-radius: 0px;
+  border-bottom: 1px solid #000;
+}
+.tab-btn.active{
+  border-bottom: 3px solid #24126A;
+  color: #24126A;
+  border-radius: 0px;
+}
+.btn-outline-warning:hover{
+  border: 1px solid rgb(202, 202, 202) !important;
+  color: #fff !important;
+}
+.text-danger{
+  color: #da2c46 !important
+}
+.text-warning{
+  color: #ffaf02 !important;
+}
+.bg-primary{
+  background-color:  #24126A !important;
+}
+.price-bg{
+  border: 1px solid #313c55 !important;
+  background-color:  #313c55 !important;
+  color: #fff;
+}
+.custom-tooltip {
+  --bs-tooltip-bg: var(--bs-info);
+  color: #000 !important;
+}
+.slick-slide {
+  margin: 0 10px !important;
+}
+
+.bg-blue-dark{
+  background: #5e738b !important
+}
+.bg-green-haze{
+  background: #44b6ae !important;
+}
+.bg-blue-madison{
+  background-color: #578ebe !important;
+}
+#mining_withdrawal_page{
+  border-bottom: 3px solid #578ebe;
+  border-radius: 0px;
+  color: #578ebe;
+}
+#referral_withdrawal_page{
+  border-bottom: 1px solid #000;
+  border-radius: 0px;
+  color: #000;
+}
